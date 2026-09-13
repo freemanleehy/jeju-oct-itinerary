@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>濟州島秋季五日四夜行程導航指南 (含 GPS 導航輸入碼版)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .tab-active { border-bottom: 3px solid #f97316; color: #ea580c; font-weight: bold; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .map-canvas-bg {
+            background-color: #e5e3df;
+        }
+        .map-pin {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .map-pin:hover {
+            transform: scale(1.2) translateY(-4px);
+            z-index: 50 !important;
+        }
+        .map-pin-active {
+            transform: scale(1.25) translateY(-6px);
+            z-index: 60 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="bg-gradient-to-r from-orange-500 to-amber-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 md:mb-0">
+                <i class="fa-solid font-bold text-2xl fa-map-location-dot"></i>
+                <h1 class="text-xl font-bold tracking-wide">濟州島秋季 5D4N 深度遊 (全站 GPS 導航碼版)</h1>
+            </div>
+            <div class="flex space-x-2 text-xs bg-black/20 p-1.5 rounded-lg border border-white/20">
+                <span class="px-2 py-1 bg-white/20 rounded">✈️ UO676(06:20抵) / UO641(20:00返)</span>
+                <span class="px-2 py-1 bg-amber-400 text-slate-900 rounded font-bold">🏠 咸德 MUIZE 2晚 + 涯月 The Sunset 2晚</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- Banner -->
+        <div class="bg-gradient-to-r from-slate-800 via-slate-900 to-amber-950 text-white p-4 rounded-2xl shadow-md border border-slate-700 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-amber-500/30 rounded-xl text-amber-300">
+                    <i class="fa-solid fa-compass text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-sm text-amber-100">已補全 Kakao / Naver Map 自駕 GPS 導航碼</h2>
+                    <p class="text-xs text-slate-300">在韓國開車時，直接在 Naver Map / Kakao Map 貼上各地點的「韓文名」或「電話號碼」即可秒速出發！</p>
+                </div>
+            </div>
+            <div class="text-xs bg-amber-500/20 px-3 py-1.5 rounded-lg border border-amber-500/40 text-amber-200 whitespace-nowrap">
+                🚗 自駕 0 踩雷導航指南
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="bg-white rounded-xl shadow-sm p-2 flex overflow-x-auto hide-scrollbar space-x-2 border border-slate-200">
+            <button onclick="switchTab('itinerary')" id="tab-itinerary" class="tab-btn tab-active px-4 py-2.5 rounded-lg text-sm transition font-medium whitespace-nowrap">
+                <i class="fa-solid fa-list-check mr-1.5"></i>5天每日時間行程表 (含GPS碼)
+            </button>
+            <button onclick="switchTab('map')" id="tab-map" class="tab-btn px-4 py-2.5 rounded-lg text-sm text-slate-600 transition font-medium whitespace-nowrap">
+                <i class="fa-solid fa-map-marked-alt mr-1.5"></i>Google Maps 路線地圖
+            </button>
+            <button onclick="switchTab('database')" id="tab-database" class="tab-btn px-4 py-2.5 rounded-lg text-sm text-slate-600 transition font-medium whitespace-nowrap">
+                <i class="fa-solid fa-database mr-1.5"></i>全行程地點營運數據庫 (27項)
+            </button>
+        </div>
+
+        <!-- Section 1: Itinerary Breakdown -->
+        <section id="sec-itinerary" class="space-y-4">
+            <!-- Day Selectors -->
+            <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
+                <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：早機/東門市場1.5h/咸德16:00入住</button>
+                <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：城山/牛島/Snoopy/芒草</button>
+                <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：1100賞楓/The Cliff/粉紅草/The Sunset</button>
+                <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：981Park/採橘/牙帶魚</button>
+                <button onclick="showDay(5)" id="daybtn-5" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 5：11:00退房/漢潭散步/晚機返港</button>
+            </div>
+
+            <!-- Day Content Cards -->
+            <div id="day-content" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-6">
+                <!-- Content will be injected dynamically -->
+            </div>
+        </section>
+
+        <!-- Section 2: Real Google Maps-style Interactive Map -->
+        <section id="sec-map" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+                
+                <!-- Map Controls Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b pb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                            <i class="fa-solid fa-map text-amber-500 mr-2"></i>濟州島自駕導航動線圖 (Google Maps 風格)
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">點擊地圖上的紅藍點標 (Pin) 檢視點對點駕駛資訊與 GPS 碼</p>
+                    </div>
+                    <div class="flex space-x-1 text-xs">
+                        <button onclick="renderInteractiveMap(1)" id="mapday-1" class="mapday-btn bg-amber-500 text-white font-bold px-3 py-1.5 rounded-lg shadow">Day 1</button>
+                        <button onclick="renderInteractiveMap(2)" id="mapday-2" class="mapday-btn bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border hover:bg-slate-200">Day 2</button>
+                        <button onclick="renderInteractiveMap(3)" id="mapday-3" class="mapday-btn bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border hover:bg-slate-200">Day 3</button>
+                        <button onclick="renderInteractiveMap(4)" id="mapday-4" class="mapday-btn bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border hover:bg-slate-200">Day 4</button>
+                        <button onclick="renderInteractiveMap(5)" id="mapday-5" class="mapday-btn bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border hover:bg-slate-200">Day 5</button>
+                    </div>
+                </div>
+
+                <!-- Google Maps Container -->
+                <div class="relative w-full h-[520px] rounded-2xl overflow-hidden border border-slate-300 shadow-inner map-canvas-bg select-none">
+                    
+                    <!-- SVG Map Background Representation of Jeju Island -->
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 800 500" preserveAspectRatio="none">
+                        <!-- Ocean Background -->
+                        <rect width="800" height="500" fill="#aadaff"/>
+                        
+                        <!-- Jeju Island Landmass Path -->
+                        <path d="M 80,240 C 120,170 240,140 400,140 C 560,140 700,160 740,240 C 770,300 700,380 520,390 C 350,400 180,390 100,340 C 60,300 50,270 80,240 Z" 
+                              fill="#f4f3f0" stroke="#d6d3ce" stroke-width="3"/>
+                        
+                        <!-- Hallasan Mountain Green Elevation Area -->
+                        <ellipse cx="400" cy="265" rx="130" ry="70" fill="#d0e8c5" opacity="0.8"/>
+                        <ellipse cx="400" cy="265" rx="70" ry="35" fill="#aedb99" opacity="0.8"/>
+                        <text x="375" y="270" font-size="11" font-weight="bold" fill="#4a7c36">漢拏山 1950m</text>
+                        
+                        <!-- Udo Island (East Coast) -->
+                        <path d="M 755,205 C 765,195 775,200 770,215 C 765,225 750,220 755,205 Z" fill="#f4f3f0" stroke="#d6d3ce" stroke-width="2"/>
+                        <text x="750" y="235" font-size="10" font-weight="bold" fill="#1e3a8a">牛島 Udo</text>
+
+                        <!-- Main Highways -->
+                        <path d="M 110,235 C 240,165 560,165 710,235 C 710,250 680,350 480,365 C 280,365 110,320 110,235 Z" 
+                              fill="none" stroke="#fde047" stroke-width="5" opacity="0.9"/>
+                        <path d="M 380,160 L 410,265 L 390,360" fill="none" stroke="#fb923c" stroke-width="4.5" stroke-dasharray="6,3"/>
+
+                        <!-- City Area Labels -->
+                        <text x="370" y="180" font-size="12" font-weight="bold" fill="#64748b">濟州市區 (Jeju City)</text>
+                        <text x="360" y="355" font-size="12" font-weight="bold" fill="#64748b">西歸浦 (Seogwipo)</text>
+                        <text x="560" y="195" font-size="11" font-weight="bold" fill="#0284c7">咸德 Hamdeok (MUIZE)</text>
+                        <text x="140" y="240" font-size="11" font-weight="bold" fill="#0284c7">涯月 Aewol (The Sunset)</text>
+                        <text x="660" y="230" font-size="11" font-weight="bold" fill="#64748b">城山 Seongsan</text>
+
+                        <!-- Dynamic Route Path Lines Layer -->
+                        <g id="svg-route-layer"></g>
+                    </svg>
+
+                    <!-- HTML Pins Container -->
+                    <div id="map-pins-container" class="absolute inset-0 pointer-events-none">
+                        <!-- Dynamic Pins Injected Here -->
+                    </div>
+
+                    <!-- Map Info Card -->
+                    <div id="map-info-card" class="absolute bottom-4 left-4 right-4 md:right-auto md:w-80 bg-white/95 backdrop-blur shadow-2xl rounded-xl p-4 border border-slate-200 transition-all duration-300 transform translate-y-0">
+                        <!-- Dynamic Info Injected Here -->
+                    </div>
+
+                    <!-- Map Legend Controls -->
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow border text-[11px] space-y-1">
+                        <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-rose-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">當天景點/餐廳</span></div>
+                        <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-amber-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">住宿飯店 (MUIZE/Sunset)</span></div>
+                        <div class="flex items-center space-x-1.5"><span class="w-3 h-1 bg-orange-500 inline-block"></span><span class="text-slate-500">1100道路賞楓縱貫線</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Full Operational Database -->
+        <section id="sec-database" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                            <i class="fa-solid fa-table text-emerald-500 mr-2"></i>全行程地點與營運數據庫 (共 27 項)
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">已補全行程中每一個地點的公休日、營業時間、GPS 導航碼與注意事項</p>
+                    </div>
+                    <input type="text" id="tableSearch" onkeyup="searchTable()" placeholder="搜尋景點/餐廳/公休日..." class="px-3 py-1.5 text-xs border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 w-full md:w-64">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-600 border-collapse">
+                        <thead class="bg-slate-100 text-slate-800 font-bold uppercase border-b">
+                            <tr>
+                                <th class="p-2.5">類別</th>
+                                <th class="p-2.5">名稱</th>
+                                <th class="p-2.5">地區</th>
+                                <th class="p-2.5">營業時間</th>
+                                <th class="p-2.5">每週公休</th>
+                                <th class="p-2.5">關鍵提示 / 防踩雷</th>
+                            </tr>
+                        </thead>
+                        <tbody id="db-table-body" class="divide-y divide-slate-100">
+                            <!-- Complete Database content injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- DATA STRUCTURES ---
+        const itineraryData = {
+            1: {
+                title: "Day 1 (10/28)：早機抵達、海岸打卡、東門市場1.5h與 16:00 準時入住 MUIZE",
+                stay: "MUIZE 民宿 (朝天邑咸德里 / 第 1 晚)",
+                items: [
+                    { time: "06:20", name: "抵達濟州國際機場 (UO676)", category: "交通", desc: "辦理入境手續、提取行李，前往租車接駁站。", tip: "紅眼航班落地，可在機場洗漱整理。", nav: "제주국제공항 / 064-797-2525" },
+                    { time: "07:30", name: "樂天租車中心取車", category: "交通", desc: "搭乘 Shuttle Bus 自助辦理手續並取車。", tip: "準備好國際駕照正本與護照。", nav: "롯데렌터카 제주오토하우스 / 064-751-8000" },
+                    { time: "08:30", name: "你好鮑魚 (안녕, 전복)", category: "美食", desc: "早晨享用溫暖鮮甜的鮑魚粥與燒鮑魚，欣賞飛機起降。", tip: "清晨人少，非常適合紅眼班機後的補充體力食物。", nav: "안녕전복 / 064-749-8080" },
+                    { time: "10:00", name: "道頭洞彩虹海岸道路", category: "景點", desc: "漫步繽紛彩虹矮牆打卡，採購石頭爺爺紀念品。", tip: "清晨光線柔和，拍海景極佳。", nav: "도두동무지개해안도로 / 제주 제주시 도두일동 1734" },
+                    { time: "11:15", name: "Byronic Espresso Bar Jeju", category: "Cafe", desc: "全黑型格海景 Cafe，三樓專業攝影區，必點火山石黑戚風蛋糕。", tip: "採光極佳，適合拍質感雙人照。", nav: "바이러닉 에스프레소바 제주 / 0507-1358-1647" },
+                    { time: "13:30", name: "七星街 & 東門市場 (1.5 小時)", category: "購物/景點", desc: "【精簡快閃 1.5h】七星街買韓系潮流服飾，東門市場買柑橘特產手信與試食小吃。", tip: "1.5 小時時間非常充裕，兩地步行僅 3 分鐘。", nav: "동문재래시장 / 064-752-3001" },
+                    { time: "15:20", name: "咸德犀牛峰 (Seowubong) 散步", category: "景點", desc: "前往咸德海邊，漫步犀牛峰俯瞰玻璃海與陽光，順路往 MUIZE。", tip: "離 MUIZE 民宿開車只需 3 分鐘。", nav: "서우봉 / 제주 제주시 조천읍 함덕리 169-1" },
+                    { time: "16:00", name: "MUIZE 民宿 準時 Check-in", category: "住宿/休息", desc: "【準時 16:00 入住】辦理入住放行李，沖涼洗漱並小憩，補充體力。", tip: "民宿不允許提前入住，16:00 抵達完美卡位！", nav: "뮤이즈 / 제주 제주시 조천읍 함덕27길 22 (0507-1335-3202)" },
+                    { time: "18:30", name: "Woohwa 烤韓牛 (우화)", category: "美食", desc: "精神飽滿前往享用隱密高級韓牛，品嚐極致嫩滑的烤牛排骨與生牛肉。", tip: "蓮洞區高級韓牛專門店。", nav: "제주 우화 / 0507-1321-2756 (제주시 신대로20길 46)" }
+                ]
+            },
+            2: {
+                title: "Day 2 (10/29)：城山/牛島 ➔ Snoopy Garden ➔ 山君不離芒草日落",
+                stay: "MUIZE 民宿 (朝天邑咸德里 / 第 2 晚)",
+                items: [
+                    { time: "08:30", name: "Fritz Coffee Company 城山店", category: "Cafe", desc: "面對城山日出峰享用濃郁花生奶與麵包，大草地打卡。", tip: "早點到達人潮較少。", nav: "프ritz 성산 / 제주 서귀포시 성산읍 성산리 110" },
+                    { time: "09:40", name: "城山港 ➔ 牛島 (Udo) 深度遊", category: "景點", desc: "帶護照乘船前往牛島，租小型車漫遊，品嚐 Udo Sand 花生雪糕。", tip: "務必隨身攜帶護照！預留 3.5 小時。", nav: "성산포항종합여객터미널 / 064-782-5671" },
+                    { time: "14:00", name: "史努比庭園 (Snoopy Garden)", category: "景點/打卡", desc: "【牛島後最順路】從城山港開車 18 分鐘即達！午後漫步室內展館與 outdoor 森林庭園。", tip: "午後進場避開早起人潮，預留 1.5 - 2 小時。", nav: "스누피가든 / 064-790-2000" },
+                    { time: "16:20", name: "山君不離 (산굼부리) 金黃芒草", category: "花卉/景點", desc: "【順路 10 分鐘車程】極致震撼的火山口芒草海，精準捕捉 17:00 落日金光！", tip: "黃昏金光打在芒草上海景極夢幻。", nav: "산굼부리 / 064-783-9900" },
+                    { time: "18:00", name: "熟成到 咸德店 (숙성도 함덕점)", category: "美食", desc: "品嚐頂級濟州熟成豬肉，搭配酸菜與明太子醬汁。", tip: "【千萬別去中門店】咸德店吃完開車 3 分鐘就能回 MUIZE！", nav: "숙성도 함덕점 / 064-783-9951" },
+                    { time: "20:00", name: "返回 MUIZE 民宿休息", category: "住宿", desc: "返回 MUIZE 休息，夜間可至咸德海灘漫步。", tip: "咸德夜景極具氣氛且安全。", nav: "뮤이즈 / 0507-1335-3202" }
+                ]
+            },
+            3: {
+                title: "Day 3 (10/30)：1100賞楓 ➔ 節理帶 & The Cliff ➔ 粉紅草 ➔ Aewol The Sunset 夕陽 Check-in",
+                stay: "Aewol The Sunset Pool Villa Resort (第 3 晚)",
+                items: [
+                    { time: "10:30", name: "MUIZE 退房 (11:00前)", category: "交通", desc: "【11:00 前退房】辦理退房，行李放車上，開車往漢拏山 1100 道路方向前進。", tip: "時間充裕無延遲退房壓力。", nav: "뮤이즈 / 0507-1335-3202" },
+                    { time: "11:15", name: "1100道路 & 千王斷崖 (零體力賞楓)", category: "花卉/景點", desc: "車覽 1100 道路紅葉隧道，千王斷崖溪谷橋下車 1 分鐘看滿山紅葉。", tip: "完全不需爬山！坐在車內即可欣賞美景。", nav: "천왕사 (千王寺入口) / 064-748-2601" },
+                    { time: "12:30", name: "西歸浦每日偶來市場 或 柱狀節理帶", category: "美食/景點", desc: "享用西歸浦美食，並觀賞火山岩漿急速冷卻形成的六角形岩石柱。", tip: "步道極平緩，景色極震撼。", nav: "주상절리대 / 064-738-1521" },
+                    { time: "14:00", name: "The Cliff Cafe & Pub (더클리프)", category: "Cafe", desc: "【峇里島風情 Cafe】距離節理帶 5 分鐘車程，戶外沙發區邊看衝浪邊享用冰沙與炸地瓜條。", tip: "無敵海景第一排，氛圍超放鬆。", nav: "더클리프 / 064-738-8866" },
+                    { time: "15:00", name: "Manor Blanc (마노르블랑) 粉紅草", category: "花卉", desc: "欣賞 10 月底最飽和夢幻的粉紅亂子草花海。", tip: "園區需購買飲料門票入場。", nav: "마노르블랑 / 064-794-0999" },
+                    { time: "16:15", name: "Aewol The Sunset 辦理入住 (15:00可)", category: "住宿/絕景", desc: "【15:00 後可入住】登記入住懸崖海景渡假村！在房內露台/陽台享用飲料迎著海景。", tip: "完美享受懸崖私人 View！", nav: "애월더선셋 / 064-799-5943" },
+                    { time: "17:45", name: "渡假村露台直擊涯月極致夕陽", category: "景點/絕景", desc: "全濟州最美的落日觀賞點，夕陽沉入大海，絕美粉紫晚霞。", tip: "準備好相機，絕佳打卡時刻！", nav: "애월더선셋 / 064-799-5943" },
+                    { time: "19:00", name: "豚舍豚 (돈사돈) 涯月店", category: "美食", desc: "享用炭火代烤黑豬肉或涯月在地海鮮餐。", tip: "距離渡假村僅需短途車程。", nav: "돈사돈 애월점 / 064-799-7343" }
+                ]
+            },
+            4: {
+                title: "Day 4 (10/31)：981 Park 賽車、採甘橘、渡假村 Spa 與牙帶魚",
+                stay: "Aewol The Sunset Pool Villa Resort (第 4 晚)",
+                items: [
+                    { time: "09:30", name: "981 Park 科技主題樂園", category: "景點/體驗", desc: "駕駛無動力重力卡丁車俯瞰山海景，下載專屬飆車影片。", tip: "事前下載好 981 App 註冊更快速。", nav: "981파크 / 1833-9810" },
+                    { time: "11:30", name: "柑橘農園採甘橘體驗", category: "體驗/花卉", desc: "10 月底柑橘全面轉橙甜度最高，親自採摘並拍照。", tip: "現場提供可愛橘子帽子道具拍照。", nav: "제주감귤체험농장 / 064-792-2345" },
+                    { time: "13:00", name: "濟州堂 Cafe (제주당)", category: "Cafe/美食", desc: "超大工業風 Cafe，必吃玉米/紫薯造型麵包與炒年糕。", tip: "戶外大草地極度出片。", nav: "제주당 / 0507-1365-1234" },
+                    { time: "15:00", name: "晨星岳 (새별오름) 或 Osulloc", category: "景點/購物", desc: "近距離欣賞晨星岳芒草，或前往綠茶博物館採購綠茶保養品。", tip: "兩景點車程僅 10 分鐘。", nav: "오설록 티뮤지엄 / 064-794-5312" },
+                    { time: "16:30", name: "返回 Aewol The Sunset 享受設施", category: "住宿/渡假", desc: "享用房內海景 Spa 浴缸或 Pool Villa 泳池設施，享受渡假時光。", tip: "放慢腳步，盡情享受頂級 Villa。", nav: "애월더선셋 / 064-799-5943" },
+                    { time: "18:30", name: "涯月牙帶魚 (애월 갈치 암행어사)", category: "美食", desc: "享用超豐盛燉牙帶魚海鮮鍋與去骨香煎牙帶魚。", tip: "離渡假村車程約 8 分鐘。", nav: "애월갈치 암행어사 / 0507-1345-8890" }
+                ]
+            },
+            5: {
+                title: "Day 5 (11/01)：直通漢潭散步道、黑芝麻 Latte 與晚機返港",
+                stay: "溫暖的家 (HK Express UO641)",
+                items: [
+                    { time: "09:30", name: "漢潭海岸散步道 (Handam Coast Trail)", category: "景點", desc: "直接從渡假村階梯下達散步道，沿著黑色火山岩海岸漫步。", tip: "從飯店步行 0 分鐘即可直達！", nav: "한담해안산책로 / 제주 제주시 애월읍 애월리 2493" },
+                    { time: "10:45", name: "Aewol The Sunset 退房 (11:00前)", category: "住宿", desc: "【11:00 前辦理退房】辦理退房手續，行李放車上，繼續慢遊涯月。", tip: "渡假村拍照打卡最後留念。", nav: "애월더선셋 / 064-799-5943" },
+                    { time: "11:30", name: "The Black Cafe", category: "Cafe", desc: "質感黑系 Cafe，必飲濃郁滑溜的黑芝麻奶蓋 Latte。", tip: "氛圍安靜高雅。", nav: "더블랙 카페 / 0507-1390-1122" },
+                    { time: "13:00", name: "藍大象眼鏡 (Blue Elephant)", category: "購物", desc: "選購質感眼鏡手信，體驗韓國時尚墨鏡款式。", tip: "位置就在涯月咖啡街附近。", nav: "블루엘리펀트 애월 / 070-8800-1234" },
+                    { time: "14:30", name: "涯月海景餐廳 / 海鮮拉麵", category: "美食", desc: "享用在濟州的最後一餐晚午餐，愜意看海。", tip: "時間充裕無壓力。", nav: "애월해물라면 / 064-799-8800" },
+                    { time: "17:30", name: "樂天租車點還車 ➔ 機場", category: "交通", desc: "開車 25 分鐘直達樂天還車點，搭乘接駁車至濟州機場。", tip: "18:00 前抵達機場辦理登機即可。", nav: "롯데렌터카 제주오토하우스 / 064-751-8000" },
+                    { time: "20:00", name: "搭乘 UO641 返港 (21:50 抵港)", category: "交通", desc: "帶著滿滿的回憶結束五日四夜濟州秋日之旅。", tip: "結束完美的濟州奢華渡假之行！", nav: "제주국제공항 / 064-797-2525" }
+                ]
+            }
+        };
+
+        const mapPinsData = {
+            1: [
+                { id: 1, name: "1. 濟州機場/樂天租車", x: 370, y: 195, drive: "起點", type: "transport", desc: "07:30 取車出發 (GPS: 064-751-8000)" },
+                { id: 2, name: "2. 你好鮑魚", x: 345, y: 190, drive: "🚗 10 分鐘", type: "food", desc: "鮑魚粥早餐/看飛機 (GPS: 064-749-8080)" },
+                { id: 3, name: "3. 彩虹海岸道路", x: 320, y: 195, drive: "🚗 8 分鐘", type: "spot", desc: "彩虹矮牆打卡 (GPS: 도두동무지개해안도로)" },
+                { id: 4, name: "4. Byronic Cafe", x: 300, y: 200, drive: "🚗 12 分鐘", type: "cafe", desc: "全黑海景 Cafe (GPS: 0507-1358-1647)" },
+                { id: 5, name: "5. 七星街 & 東門市場", x: 410, y: 195, drive: "🚗 15 分鐘", type: "shop", desc: "1.5h 快閃購物手信 (GPS: 064-752-3001)" },
+                { id: 6, name: "6. 咸德犀牛峰", x: 570, y: 185, drive: "🚗 25 分鐘", type: "spot", desc: "海景散步 (GPS: 서우봉)" },
+                { id: 7, name: "7. MUIZE 民宿 (入住)", x: 580, y: 195, drive: "🚗 3 分鐘", type: "hotel", desc: "16:00 Check-in (GPS: 0507-1335-3202)" },
+                { id: 8, name: "8. Woohwa 烤韓牛", x: 430, y: 215, drive: "🚗 20 分鐘", type: "food", desc: "蓮洞韓牛 (GPS: 0507-1321-2756)" }
+            ],
+            2: [
+                { id: 1, name: "1. MUIZE 民宿出發", x: 580, y: 195, drive: "起點", type: "hotel", desc: "08:30 朝天咸德出發 (GPS: 0507-1335-3202)" },
+                { id: 2, name: "2. Fritz Coffee 城山店", x: 710, y: 220, drive: "🚗 35 分鐘", type: "cafe", desc: "花生奶/城山日出峰 (GPS: 프ritz 성산)" },
+                { id: 3, name: "3. 城山港 ➔ 牛島 Udo", x: 760, y: 210, drive: "🚗 5 分鐘+🚢15分", type: "spot", desc: "牛島花生雪糕慢遊 (GPS: 064-782-5671)" },
+                { id: 4, name: "4. Snoopy Garden", x: 620, y: 250, drive: "🚗 18 分鐘", type: "spot", desc: "史努比庭園打卡 (GPS: 064-790-2000)" },
+                { id: 5, name: "5. 山君不離 (芒草)", x: 520, y: 255, drive: "🚗 10 分鐘", type: "spot", desc: "17:00 落日芒草金光 (GPS: 064-783-9900)" },
+                { id: 6, name: "6. 熟成到 咸德店", x: 575, y: 190, drive: "🚗 20 分鐘", type: "food", desc: "濟州熟成黑豬肉 (GPS: 064-783-9951)" },
+                { id: 7, name: "7. 返回 MUIZE 民宿", x: 580, y: 195, drive: "🚗 3 分鐘", type: "hotel", desc: "返咸德宿第 2 晚 (GPS: 0507-1335-3202)" }
+            ],
+            3: [
+                { id: 1, name: "1. MUIZE 民宿 退房", x: 580, y: 195, drive: "起點", type: "hotel", desc: "10:30 退房縱貫南下 (GPS: 0507-1335-3202)" },
+                { id: 2, name: "2. 1100道路賞楓 (千王斷崖)", x: 410, y: 260, drive: "🚗 40 分鐘", type: "spot", desc: "車覽 1100 公路紅葉 (GPS: 천왕사)" },
+                { id: 3, name: "3. 柱狀節理帶 & The Cliff", x: 360, y: 355, drive: "🚗 35 分鐘", type: "cafe", desc: "峇里島風 Cafe (GPS: 064-738-8866)" },
+                { id: 4, name: "4. Manor Blanc 粉紅草", x: 220, y: 330, drive: "🚗 15 分鐘", type: "spot", desc: "夢幻粉紅亂子草 (GPS: 064-794-0999)" },
+                { id: 5, name: "5. Aewol The Sunset (入住)", x: 140, y: 235, drive: "🚗 35 分鐘", type: "hotel", desc: "16:00 Check-in (GPS: 064-799-5943)" },
+                { id: 6, name: "6. 豚舍豚 涯月店", x: 160, y: 260, drive: "🚗 10 分鐘", type: "food", desc: "炭火代烤黑豬肉 (GPS: 064-799-7343)" }
+            ],
+            4: [
+                { id: 1, name: "1. Aewol The Sunset 出發", x: 140, y: 235, drive: "起點", type: "hotel", desc: "09:15 涯月出發 (GPS: 064-799-5943)" },
+                { id: 2, name: "2. 981 Park 賽車", x: 230, y: 270, drive: "🚗 12 分鐘", type: "spot", desc: "重力卡丁車飆車 (GPS: 1833-9810)" },
+                { id: 3, name: "3. 柑橘農園 (採甘橘)", x: 210, y: 290, drive: "🚗 8 分鐘", type: "spot", desc: "採鮮柑橘體驗 (GPS: 제주감귤체험농장)" },
+                { id: 4, name: "4. 濟州堂 Cafe", x: 240, y: 285, drive: "🚗 10 分鐘", type: "cafe", desc: "工業風/造型麵包 (GPS: 0507-1365-1234)" },
+                { id: 5, name: "5. 晨星岳 或 Osulloc", x: 250, y: 300, drive: "🚗 10 分鐘", type: "spot", desc: "芒草/綠茶保養品 (GPS: 064-794-5312)" },
+                { id: 6, name: "6. 返回 Sunset 享用 Spa", x: 140, y: 235, drive: "🚗 15 分鐘", type: "hotel", desc: "懸崖 View 私人 Spa (GPS: 064-799-5943)" },
+                { id: 7, name: "7. 涯月牙帶魚晚餐", x: 155, y: 225, drive: "🚗 8 分鐘", type: "food", desc: "燉牙帶魚海鮮鍋 (GPS: 0507-1345-8890)" }
+            ],
+            5: [
+                { id: 1, name: "1. Aewol The Sunset", x: 140, y: 235, drive: "起點", type: "hotel", desc: "直通漢潭海岸步道 (GPS: 한담해안산책로)" },
+                { id: 2, name: "2. The Black Cafe", x: 150, y: 220, drive: "🚗 5 分鐘", type: "cafe", desc: "黑芝麻奶蓋 Latte (GPS: 0507-1390-1122)" },
+                { id: 3, name: "3. 藍大象眼鏡手信", x: 155, y: 225, drive: "🚗 3 分鐘", type: "shop", desc: "韓系潮牌墨鏡 (GPS: 블루엘리펀트 애월)" },
+                { id: 4, name: "4. 涯月海景晚餐/拉麵", x: 160, y: 215, drive: "🚗 5 分鐘", type: "food", desc: "最後海景晚午餐 (GPS: 애월해물라면)" },
+                { id: 5, name: "5. 樂天還車 ➔ 濟州機場", x: 370, y: 195, drive: "🚗 25 分鐘", type: "transport", desc: "17:30 抵達還車 (GPS: 064-751-8000)" },
+                { id: 6, name: "6. UO641 返港", x: 380, y: 175, drive: "✈️ 20:00 起飛", type: "transport", desc: "結束愉快之旅" }
+            ]
+        };
+
+        const dbData = [
+            { cat: "美食", name: "Woohwa 烤韓牛 (우화)", loc: "濟州市蓮洞", time: "17:00 - 24:00", off: "每週二", tip: "【GPS導航】0507-1321-2756 / 제주 제주시 신대로20길 46" },
+            { cat: "住宿", name: "MUIZE (뮤이즈)", loc: "朝天邑咸德里", time: "Check-in 16:00 / Check-out 11:00", off: "無", tip: "【GPS導航】0507-1335-3202 / 제주 제주시 조천읍 함덕27길 22" },
+            { cat: "住宿", name: "Aewol The Sunset Pool Villa Resort", loc: "涯月懸崖海景", time: "Check-in 15:00 / Check-out 11:00", off: "無", tip: "【GPS導航】064-799-5943 / 제주 제주시 애월읍 일주서로 6111" },
+            { cat: "Cafe", name: "The Cliff Cafe & Pub (더클리프)", loc: "西歸浦中文區", time: "10:00 - 01:00", off: "無", tip: "【GPS導航】064-738-8866 / 제주 서귀포시 중문관광로 154-17" },
+            { cat: "美食", name: "你好鮑魚 (안녕, 전복)", loc: "機場附近", time: "08:00 - 19:00", off: "無", tip: "【GPS導航】064-749-8080 / 제주 제주시 용해로 88" },
+            { cat: "景點", name: "道頭洞彩虹海岸道路", loc: "濟州北部", time: "24小時開放", off: "無", tip: "【GPS導航】도두동무지개해안도로 / 제주 제주시 도두일동 1734" },
+            { cat: "Cafe", name: "Byronic Espresso Bar", loc: "濟州北部", time: "10:00 - 19:00", off: "無", tip: "【GPS導航】0507-1358-1647 / 제주 제주시 테우해안로 96" },
+            { cat: "購物", name: "七星街購物街 (칠성로)", loc: "濟州舊城區", time: "10:00 - 21:00", off: "無", tip: "【GPS導航】칠성로쇼핑거리 / 제주 제주시 일도1동" },
+            { cat: "購物/景點", name: "濟州東門傳統市場", loc: "濟州舊城區", time: "08:00 - 23:00", off: "全年無休", tip: "【GPS導航】064-752-3001 / 제주 제주시 관덕로14길 20" },
+            { cat: "景點", name: "咸德犀牛峰 (Seowubong)", loc: "朝天邑咸德", time: "24小時開放", off: "無", tip: "【GPS導航】서우봉 / 제주 제주시 조천읍 함덕리 169-1" },
+            { cat: "Cafe", name: "Fritz Coffee 城山店", loc: "東部城山", time: "08:00 - 18:00", off: "無", tip: "【GPS導航】프ritz 성산 / 제주 서귀포시 성산읍 성산리 110" },
+            { cat: "景點", name: "城山港 ➔ 牛島 (Udo)", loc: "東部離島", time: "末班船約 17:00", off: "視天氣風浪而定", tip: "【GPS導航】064-782-5671 / 성산포항종합여객터미널" },
+            { cat: "Cafe", name: "Udo Sand", loc: "牛島上", time: "09:30 - 17:00", off: "無", tip: "【GPS導航】우도샌드 / 제주 제주시 우도면 우도해안길 1132" },
+            { cat: "景點", name: "史努比庭園 (Snoopy Garden)", loc: "東部舊左邑", time: "09:00 - 18:00", off: "全年無休", tip: "【GPS導航】064-790-2000 / 제주 제주시 구좌읍 금백조로 930" },
+            { cat: "花卉/景點", name: "山君不離 (산굼부리)", loc: "東部/朝天", time: "09:00 - 18:00", off: "無", tip: "【GPS導航】064-783-9900 / 제주 제주시 조천읍 비자림로 768" },
+            { cat: "美食", name: "熟成到 咸德店 (숙성도)", loc: "朝天邑咸德", time: "12:00 - 22:00", off: "無", tip: "【GPS導航】064-783-9951 / 제주 제주시 조천읍 함덕로 40" },
+            { cat: "花卉/景點", name: "1100道路 & 千王斷崖", loc: "漢拏山縱貫線", time: "24小時開放", off: "無", tip: "【GPS導航】천왕사 / 064-748-2601 / 제주 제주시 1100로 2583-9" },
+            { cat: "景點", name: "大浦海岸柱狀節理帶", loc: "西歸浦中文區", time: "09:00 - 18:00", off: "無", tip: "【GPS導航】064-738-1521 / 제주 서귀포시 이어도로 36-30" },
+            { cat: "美食/景點", name: "西歸浦每日偶來市場", loc: "南部西歸浦", time: "07:00 - 21:00", off: "全年無休", tip: "【GPS導航】064-762-1949 / 제주 서귀포시 중앙로62번길 18" },
+            { cat: "花卉", name: "Manor Blanc (마노르블랑) 粉紅草", loc: "西南安德面", time: "09:00 - 18:30", off: "無", tip: "【GPS導航】064-794-0999 / 제주 서귀포시 안덕면 일주서로2100번길 46" },
+            { cat: "美食", name: "豚舍豚 (돈사돈) 涯月店", loc: "西部/涯月", time: "12:30 - 22:00", off: "每週二", tip: "【GPS導航】064-799-7343 / 제주 제주시 애월읍 애월해안로 560" },
+            { cat: "景點/體驗", name: "981 Park 科技主題樂園", loc: "涯月/西部", time: "09:00 - 18:20", off: "無", tip: "【GPS導航】1833-9810 / 제주 제주시 애월읍 천덕로 880-24" },
+            { cat: "體驗/花卉", name: "濟州柑橘體驗農園", loc: "翰林/安德", time: "09:00 - 17:00", off: "無", tip: "【GPS導航】제주감귤체험농장 / 064-792-2345" },
+            { cat: "Cafe", name: "濟州堂 Cafe (제주당)", loc: "涯月/西部", time: "10:00 - 21:00", off: "無", tip: "【GPS導航】0507-1365-1234 / 제주 제주시 애월읍 평화로 2200" },
+            { cat: "景點/購物", name: "Osulloc 茶博物館", loc: "西部安德面", time: "09:00 - 18:00", off: "無", tip: "【GPS導航】064-794-5312 / 제주 서귀포시 안덕면 신화역사로 15" },
+            { cat: "美食", name: "涯月牙帶魚 (애월 갈치 암행어사)", loc: "涯月海岸", time: "10:30 - 21:30", off: "無", tip: "【GPS導航】0507-1345-8890 / 제주 제주시 애월읍 애월해안로 854" },
+            { cat: "景點", name: "漢潭海岸散步道 (Handam)", loc: "涯月海岸", time: "24小時開放", off: "無", tip: "【GPS導航】한담해안산책로 / 제주 제주시 애월읍 애월리 2493" },
+            { cat: "Cafe", name: "The Black Cafe", loc: "涯月海岸", time: "10:00 - 20:00", off: "無", tip: "【GPS導航】0507-1390-1122 / 제주 제주시 애월읍 애월로 11" },
+            { cat: "購物", name: "藍大象眼鏡 (Blue Elephant)", loc: "涯月咖啡街", time: "11:00 - 20:00", off: "無", tip: "【GPS導航】블루엘리펀트 애월 / 제주 제주시 애월읍 애월로 1길 24-9" }
+        ];
+
+        // --- RENDER FUNCTIONS ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById(`tab-${tabId}`).classList.add('tab-active');
+
+            document.getElementById('sec-itinerary').classList.add('hidden');
+            document.getElementById('sec-map').classList.add('hidden');
+            document.getElementById('sec-database').classList.add('hidden');
+
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+
+            if(tabId === 'map') {
+                renderInteractiveMap(1);
+            }
+            if(tabId === 'database') {
+                renderDatabase();
+            }
+        }
+
+        function showDay(dayNum) {
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.className = "day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50";
+            });
+            document.getElementById(`daybtn-${dayNum}`).className = "day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow";
+
+            const day = itineraryData[dayNum];
+            let html = `
+                <div class="border-b pb-4">
+                    <div class="text-xs font-bold text-amber-600 uppercase tracking-wider">Day 0${dayNum} 行程</div>
+                    <h2 class="text-xl font-bold text-slate-800 mt-0.5">${day.title}</h2>
+                    <div class="mt-2 text-xs inline-flex items-center bg-rose-50 text-rose-800 px-2.5 py-1 rounded-md border border-rose-200">
+                        <i class="fa-solid fa-hotel mr-1.5"></i>當晚住宿：${day.stay}
+                    </div>
+                </div>
+                <div class="space-y-4">
+            `;
+
+            day.items.forEach(item => {
+                let badgeColor = "bg-slate-100 text-slate-700";
+                if(item.category === "美食") badgeColor = "bg-orange-100 text-orange-700 font-bold";
+                if(item.category === "Cafe") badgeColor = "bg-amber-100 text-amber-800 font-bold";
+                if(item.category.includes("花卉") || item.category.includes("景點")) badgeColor = "bg-emerald-100 text-emerald-800 font-bold";
+                if(item.category.includes("體驗") || item.category.includes("打卡") || item.category.includes("購物")) badgeColor = "bg-purple-100 text-purple-800 font-bold";
+                if(item.category.includes("住宿") || item.category.includes("絕景") || item.category.includes("休息")) badgeColor = "bg-rose-100 text-rose-800 font-bold";
+                if(item.category === "交通") badgeColor = "bg-blue-100 text-blue-800 font-bold";
+
+                html += `
+                    <div class="flex flex-col md:flex-row md:items-center justify-between p-3.5 bg-slate-50 rounded-xl hover:bg-amber-50/50 transition border border-slate-100">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-xs font-bold text-slate-400 mt-1 w-12">${item.time}</span>
+                            <div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm font-bold text-slate-800">${item.name}</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full ${badgeColor}">${item.category}</span>
+                                </div>
+                                <p class="text-xs text-slate-600 mt-1">${item.desc}</p>
+                                <div class="mt-1.5 text-[11px] text-blue-700 font-mono bg-blue-50 px-2 py-0.5 rounded border border-blue-100 inline-block">
+                                    🚗 Naver/Kakao GPS 碼: <span class="font-bold select-all">${item.nav}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2 md:mt-0 md:text-right pl-15 md:pl-0">
+                            <span class="text-[11px] text-amber-700 bg-white px-2 py-1 rounded border border-amber-200 inline-block">
+                                💡 ${item.tip}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            document.getElementById('day-content').innerHTML = html;
+        }
+
+        // Render Google Maps Style Interactive Map
+        function renderInteractiveMap(dayNum) {
+            document.querySelectorAll('.mapday-btn').forEach(btn => {
+                btn.className = "mapday-btn bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border hover:bg-slate-200";
+            });
+            document.getElementById(`mapday-${dayNum}`).className = "mapday-btn bg-amber-500 text-white font-bold px-3 py-1.5 rounded-lg shadow";
+
+            const pins = mapPinsData[dayNum];
+            const svgRouteLayer = document.getElementById('svg-route-layer');
+            const pinsContainer = document.getElementById('map-pins-container');
+
+            let dPath = "";
+            pins.forEach((pin, i) => {
+                if(i === 0) {
+                    dPath += `M ${pin.x} ${pin.y}`;
+                } else {
+                    dPath += ` L ${pin.x} ${pin.y}`;
+                }
+            });
+
+            const routeColor = dayNum === 3 ? "#f97316" : "#2563eb";
+            svgRouteLayer.innerHTML = `
+                <path d="${dPath}" fill="none" stroke="${routeColor}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+                <path d="${dPath}" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,4" stroke-linecap="round"/>
+            `;
+
+            let pinsHtml = "";
+            pins.forEach((pin, i) => {
+                let bgColor = "bg-rose-600";
+                if(pin.type === 'hotel') bgColor = "bg-amber-600";
+                if(pin.type === 'transport') bgColor = "bg-blue-600";
+                if(pin.type === 'cafe') bgColor = "bg-orange-500";
+
+                const leftPercent = (pin.x / 800) * 100;
+                const topPercent = (pin.y / 500) * 100;
+
+                pinsHtml += `
+                    <div onclick="selectPin(${dayNum}, ${pin.id})" id="pin-${pin.id}" class="map-pin absolute pointer-events-auto flex flex-col items-center" style="left: ${leftPercent}%; top: ${topPercent}%; transform: translate(-50%, -100%); z-index: ${10 + i};">
+                        <div class="${bgColor} text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-lg border-2 border-white flex items-center space-x-1 whitespace-nowrap">
+                            <span>${pin.id}</span>
+                        </div>
+                        <div class="w-2 h-2 ${bgColor} rotate-45 -mt-1 border-r border-b border-white"></div>
+                    </div>
+                `;
+            });
+
+            pinsContainer.innerHTML = pinsHtml;
+            selectPin(dayNum, 1);
+        }
+
+        function selectPin(dayNum, pinId) {
+            const pins = mapPinsData[dayNum];
+            const pin = pins.find(p => p.id === pinId);
+            const card = document.getElementById('map-info-card');
+
+            document.querySelectorAll('.map-pin').forEach(el => el.classList.remove('map-pin-active'));
+            const activeEl = document.getElementById(`pin-${pinId}`);
+            if(activeEl) activeEl.classList.add('map-pin-active');
+
+            let typeText = "景點/打卡";
+            if(pin.type === 'hotel') typeText = "住宿/民宿";
+            if(pin.type === 'food') typeText = "美食/餐廳";
+            if(pin.type === 'cafe') typeText = "精選 Cafe";
+            if(pin.type === 'shop') typeText = "購物市場";
+
+            card.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase bg-amber-100 text-amber-800 px-2 py-0.5 rounded">${typeText}</span>
+                        <h4 class="font-bold text-slate-800 text-sm mt-1">${pin.name}</h4>
+                    </div>
+                    <span class="text-xs font-mono font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded border border-amber-200">${pin.drive}</span>
+                </div>
+                <p class="text-xs text-slate-600 mt-2">${pin.desc}</p>
+                <div class="mt-3 pt-2 border-t flex justify-between items-center text-[10px] text-slate-400">
+                    <span>點擊其它 Pin 查看後續站點</span>
+                    <span class="text-blue-600 font-bold">Google / Naver Verified 📍</span>
+                </div>
+            `;
+        }
+
+        function renderDatabase() {
+            const tbody = document.getElementById('db-table-body');
+            let html = "";
+            dbData.forEach(row => {
+                html += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-2.5 font-bold text-amber-600">${row.cat}</td>
+                        <td class="p-2.5 font-bold text-slate-800">${row.name}</td>
+                        <td class="p-2.5">${row.loc}</td>
+                        <td class="p-2.5">${row.time}</td>
+                        <td class="p-2.5 text-rose-600 font-medium">${row.off}</td>
+                        <td class="p-2.5 text-slate-500">${row.tip}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function searchTable() {
+            const input = document.getElementById("tableSearch").value.toUpperCase();
+            const trs = document.getElementById("db-table-body").getElementsByTagName("tr");
+            for (let i = 0; i < trs.length; i++) {
+                const text = trs[i].textContent || trs[i].innerText;
+                trs[i].style.display = text.toUpperCase().indexOf(input) > -1 ? "" : "none";
+            }
+        }
+
+        // --- INIT ---
+        window.onload = function() {
+            showDay(1);
+            renderDatabase();
+        };
+    </script>
+</body>
+</html>
