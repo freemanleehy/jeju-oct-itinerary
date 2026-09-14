@@ -1,0 +1,14 @@
+# Claude Code local settings — never commit
+.claude/
+
+# OS junk
+.DS_Store
+desktop.ini
+*.tmp
+~$*
+
+# Secrets
+.env
+.env.*
+*.key
+credentials.*
