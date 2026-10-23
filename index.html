@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>濟州島秋季五日四夜行程導航指南 (含 GPS 導航輸入碼版)</title>
+    <title>濟州島秋季五日四夜輕鬆慢遊指南</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -37,7 +37,7 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center space-x-3 mb-2 md:mb-0">
                 <i class="fa-solid font-bold text-2xl fa-map-location-dot"></i>
-                <h1 class="text-xl font-bold tracking-wide">濟州島秋季 5D4N 深度遊 (全站 GPS 導航碼版)</h1>
+                <h1 class="text-xl font-bold tracking-wide">濟州島秋季 5D4N 深度遊 (輕鬆慢遊版)</h1>
             </div>
             <div class="flex space-x-2 text-xs bg-black/20 p-1.5 rounded-lg border border-white/20">
                 <span class="px-2 py-1 bg-white/20 rounded">✈️ UO676(06:20抵) / UO641(20:00返)</span>
@@ -55,13 +55,25 @@
                     <i class="fa-solid fa-compass text-2xl"></i>
                 </div>
                 <div>
-                    <h2 class="font-bold text-sm text-amber-100">已補全 Kakao / Naver Map 自駕 GPS 導航碼</h2>
-                    <p class="text-xs text-slate-300">在韓國開車時，直接在 Naver Map / Kakao Map 貼上各地點的「韓文名」或「電話號碼」即可秒速出發！</p>
+                    <h2 class="font-bold text-sm text-amber-100">輕鬆慢遊版：每區慢慢玩，避免折返</h2>
+                    <p class="text-xs text-slate-300">Day 5接手981與東門市場；Day 4慢逛粉紅草。時間均為建議，車程為保守估算，請以當天Naver／Kakao導航、天氣及店家公告為準。</p>
                 </div>
             </div>
             <div class="text-xs bg-amber-500/20 px-3 py-1.5 rounded-lg border border-amber-500/40 text-amber-200 whitespace-nowrap">
-                🚗 自駕 0 踩雷導航指南
+                🚗 每天留白・主線與替代分開
             </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
+            <h2 class="font-bold text-slate-800">五天節奏一覽</h2>
+            <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead><tr class="text-slate-500 border-b"><th class="py-2 pr-4">日期</th><th class="py-2 pr-4">主線</th><th class="py-2">放鬆安排</th></tr></thead><tbody class="divide-y divide-slate-100">
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 1 · 10/28</td><td class="py-2 pr-4">北岸 → 咸德</td><td class="py-2">午餐後留白，入住補眠，晚餐不回市區</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 2 · 10/29</td><td class="py-2 pr-4">牛島慢遊</td><td class="py-2">庭園是替代路線，不在渡輪後追兩個景點</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 3 · 10/30</td><td class="py-2 pr-4">09:30退房 → 中文區 → 涯月</td><td class="py-2">The Cliff與射擊；粉紅草留待明天</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 4 · 10/31</td><td class="py-2 pr-4">Manor Blanc → Osulloc</td><td class="py-2">只逛兩個園區，傍晚回住宿休息</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 5 · 11/01</td><td class="py-2 pr-4">981 → Noraba → 東門市場 → 機場</td><td class="py-2">接手賽車與購物；16:00離開市區還車</td></tr>
+            </tbody></table></div>
+            <p class="text-xs text-slate-500">主線時間已含用餐與移動空間；可選景點用作替換。當天延誤先刪可選站，不壓縮午餐、休息或機場緩衝。</p>
         </div>
 
         <!-- Navigation Tabs -->
@@ -70,7 +82,7 @@
                 <i class="fa-solid fa-list-check mr-1.5"></i>5天每日時間行程表 (含GPS碼)
             </button>
             <button onclick="switchTab('map')" id="tab-map" class="tab-btn px-4 py-2.5 rounded-lg text-sm text-slate-600 transition font-medium whitespace-nowrap">
-                <i class="fa-solid fa-map-marked-alt mr-1.5"></i>Google Maps 路線地圖
+                <i class="fa-solid fa-map-marked-alt mr-1.5"></i>每日主線示意圖
             </button>
             <button onclick="switchTab('database')" id="tab-database" class="tab-btn px-4 py-2.5 rounded-lg text-sm text-slate-600 transition font-medium whitespace-nowrap">
                 <i class="fa-solid fa-database mr-1.5"></i>全行程地點營運數據庫 (<span class="db-count"></span>項)
@@ -81,11 +93,11 @@
         <section id="sec-itinerary" class="space-y-4">
             <!-- Day Selectors -->
             <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
-                <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：早機/東門市場1.5h/咸德16:00入住</button>
-                <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：城山/牛島/Snoopy/芒草</button>
-                <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：1100賞楓/The Cliff/實彈射擊/粉紅草</button>
-                <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：981Park/採橘/牙帶魚</button>
-                <button onclick="showDay(5)" id="daybtn-5" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 5：11:00退房/漢潭/Noraba海鮮麵/晚機</button>
+                <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：北岸早餐／咸德休息</button>
+                <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：牛島慢遊／庭園替代線</button>
+                <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：09:30退房／The Cliff／射擊</button>
+                <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：粉紅草／茶園／住宿休息</button>
+                <button onclick="showDay(5)" id="daybtn-5" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 5：981／Noraba／東門市場</button>
             </div>
 
             <!-- Day Content Cards -->
@@ -102,9 +114,9 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b pb-4">
                     <div>
                         <h3 class="text-lg font-bold text-slate-800 flex items-center">
-                            <i class="fa-solid fa-map text-amber-500 mr-2"></i>濟州島自駕導航動線圖 (Google Maps 風格)
+                            <i class="fa-solid fa-map text-amber-500 mr-2"></i>濟州島自駕導航動線圖 (非導航地圖)
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">點擊地圖上的紅藍點標 (Pin) 檢視點對點駕駛資訊與 GPS 碼</p>
+                        <p class="text-xs text-slate-500 mt-0.5">只顯示每日主線；可選景點不納入連線。點擊標記查看建議時段，車程非即時路況。</p>
                     </div>
                     <div class="flex space-x-1 text-xs">
                         <button onclick="renderInteractiveMap(1)" id="mapday-1" class="mapday-btn bg-amber-500 text-white font-bold px-3 py-1.5 rounded-lg shadow">Day 1</button>
@@ -166,7 +178,7 @@
                     <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow border text-[11px] space-y-1">
                         <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-rose-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">當天景點/餐廳</span></div>
                         <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-amber-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">住宿飯店 (MUIZE/Sunset)</span></div>
-                        <div class="flex items-center space-x-1.5"><span class="w-3 h-1 bg-orange-500 inline-block"></span><span class="text-slate-500">1100道路賞楓縱貫線</span></div>
+                        <div class="flex items-center space-x-1.5"><span class="w-3 h-1 bg-orange-500 inline-block"></span><span class="text-slate-500">Day 3跨區移動主線</span></div>
                     </div>
                 </div>
             </div>
@@ -180,7 +192,7 @@
                         <h3 class="text-lg font-bold text-slate-800 flex items-center">
                             <i class="fa-solid fa-table text-emerald-500 mr-2"></i>全行程地點與營運數據庫 (共 <span class="db-count"></span> 項)
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">已補全行程中每一個地點的公休日、營業時間、GPS 導航碼與注意事項</p>
+                        <p class="text-xs text-slate-500 mt-0.5">含主線與備選景點；舊有店家資料未逐一重新核實，請出發前確認地址、營業及公休。</p>
                     </div>
                     <input type="text" id="tableSearch" onkeyup="searchTable()" placeholder="搜尋景點/餐廳/公休日..." class="px-3 py-1.5 text-xs border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 w-full md:w-64">
                 </div>
@@ -210,119 +222,132 @@
         // --- DATA STRUCTURES ---
         const itineraryData = {
             1: {
-                title: "Day 1 (10/28)：早機抵達、海岸打卡、東門市場1.5h與 16:00 準時入住 MUIZE",
+                title: "Day 1 (10/28)：落地慢慢來：北岸早餐、咸德海邊與補眠",
                 stay: "MUIZE 民宿 (朝天邑咸德里 / 第 1 晚)",
+                pace: "紅眼航班恢復日｜只走北岸，晚餐留在住宿附近。東門市場已移至Day 5。",
                 items: [
-                    { time: "06:20", name: "抵達濟州國際機場 (UO676)", category: "交通", desc: "辦理入境手續、提取行李，前往租車接駁站。", tip: "紅眼航班落地，可在機場洗漱整理。", nav: "제주국제공항 / 064-797-2525" },
-                    { time: "07:30", name: "樂天租車中心取車", category: "交通", desc: "搭乘 Shuttle Bus 自助辦理手續並取車。", tip: "準備好國際駕照正本與護照。", nav: "롯데렌터카 제주오토하우스 / 064-751-8000" },
-                    { time: "08:30", name: "你好鮑魚 (안녕, 전복)", category: "美食", desc: "早晨享用溫暖鮮甜的鮑魚粥與燒鮑魚，欣賞飛機起降。", tip: "清晨人少，非常適合紅眼班機後的補充體力食物。", nav: "안녕전복 / 064-749-8080" },
-                    { time: "10:00", name: "道頭洞彩虹海岸道路", category: "景點", desc: "漫步繽紛彩虹矮牆打卡，採購石頭爺爺紀念品。", tip: "清晨光線柔和，拍海景極佳。", nav: "도두동무지개해안도로 / 제주 제주시 도두일동 1734" },
-                    { time: "11:15", name: "Byronic Espresso Bar Jeju", category: "Cafe", desc: "全黑型格海景 Cafe，三樓專業攝影區，必點火山石黑戚風蛋糕。", tip: "採光極佳，適合拍質感雙人照。", nav: "바이러닉 에스프레소바 제주 / 0507-1358-1647" },
-                    { time: "13:30", name: "七星街 & 東門市場 (1.5 小時)", category: "購物/景點", desc: "【精簡快閃 1.5h】七星街買韓系潮流服飾，東門市場買柑橘特產手信與試食小吃。", tip: "1.5 小時時間非常充裕，兩地步行僅 3 分鐘。", nav: "동문재래시장 / 064-752-3001" },
-                    { time: "15:20", name: "咸德犀牛峰 (Seowubong) 散步", category: "景點", desc: "前往咸德海邊，漫步犀牛峰俯瞰玻璃海與陽光，順路往 MUIZE。", tip: "離 MUIZE 民宿開車只需 3 分鐘。", nav: "서우봉 / 제주 제주시 조천읍 함덕리 169-1" },
-                    { time: "16:00", name: "MUIZE 民宿 準時 Check-in", category: "住宿/休息", desc: "【準時 16:00 入住】辦理入住放行李，沖涼洗漱並小憩，補充體力。", tip: "民宿不允許提前入住，16:00 抵達完美卡位！", nav: "뮤이즈 / 제주 제주시 조천읍 함덕27길 22 (0507-1335-3202)" },
-                    { time: "18:30", name: "Woohwa 烤韓牛 (우화)", category: "美食", desc: "精神飽滿前往享用隱密高級韓牛，品嚐極致嫩滑的烤牛排骨與生牛肉。", tip: "蓮洞區高級韓牛專門店。", nav: "제주 우화 / 0507-1321-2756 (제주시 신대로20길 46)" }
+                    {"time": "06:20", "name": "抵達濟州國際機場 (UO676)", "category": "交通", "desc": "辦理入境手續、提取行李，前往租車接駁站。", "tip": "紅眼航班落地，可在機場洗漱整理。", "nav": "제주국제공항 / 064-797-2525"},
+                    {"time": "07:30", "name": "樂天租車中心取車", "category": "交通", "desc": "搭乘 Shuttle Bus 自助辦理手續並取車。", "tip": "取車時間為估算，入境較慢就順延早餐；疲倦時先休息，勿勉強駕駛。", "nav": "롯데렌터카 제주오토하우스 / 064-751-8000"},
+                    {"time": "08:30", "name": "你好鮑魚 (안녕, 전복)", "category": "美食", "desc": "早晨享用溫暖鮮甜的鮑魚粥與燒鮑魚，欣賞飛機起降。", "tip": "清晨人少，非常適合紅眼班機後的補充體力食物。", "nav": "안녕전복 / 064-749-8080"},
+                    {"time": "10:00", "name": "道頭洞彩虹海岸道路", "category": "景點", "desc": "輕鬆散步約30–45分鐘；太累可直接跳過，今天不用逐站打卡。", "tip": "清晨光線柔和，拍海景極佳。", "nav": "도두동무지개해안도로 / 제주 제주시 도두일동 1734"},
+                    {"time": "11:00", "name": "Byronic Espresso Bar Jeju", "category": "Cafe", "desc": "坐下喝咖啡、休息約1小時，按精神狀況決定停留長短。", "tip": "若疲倦，省略咖啡店，提早往咸德。", "nav": "바이러닉 에스프레소바 제주 / 0507-1358-1647"},
+                    {"time": "12:30", "name": "咸德午餐 & 海灘自由時間", "category": "美食/休息", "desc": "往東到咸德，車程抓45–60分鐘。午餐後海邊坐坐，入住前不安排爬坡或長途活動。", "tip": "可詢問民宿能否寄存行李；不假設可提早入住。", "nav": "함덕해수욕장"},
+                    {"time": "16:00", "name": "MUIZE 民宿 準時 Check-in", "category": "住宿/休息", "desc": "入住後洗澡、補眠，預留至少2小時休息。", "tip": "16:00入住以原訂單為準。", "nav": "뮤이즈 / 제주 제주시 조천읍 함덕27길 22 (0507-1335-3202)"},
+                    {"time": "18:30", "name": "熟成到 咸德店 (숙성도 함덕점)", "category": "美食", "desc": "品嚐頂級濟州熟成豬肉，搭配酸菜與明太子醬汁。", "tip": "留在咸德吃晚餐；若需長時間候位，改附近餐廳。", "nav": "숙성도 함덕점 / 064-783-9951"}
+                ],
+                options: [
+                    {"name": "犀牛峰／咸德短散步", "desc": "只在精神好時加20–30分鐘；不列為必走登頂行程。", "nav": "서우봉"},
+                    {"name": "Woohwa 韓牛：晚餐替換選項", "desc": "若很想吃，可取代咸德晚餐；位於濟州市蓮洞，會增加來回車程，先確認預約再決定。", "nav": "제주 우화 / 0507-1321-2756"}
                 ]
             },
             2: {
-                title: "Day 2 (10/29)：城山/牛島 ➔ Snoopy Garden ➔ 山君不離芒草日落",
+                title: "Day 2 (10/29)：東部牛島一日慢遊，不追趕兩個庭園",
                 stay: "MUIZE 民宿 (朝天邑咸德里 / 第 2 晚)",
+                pace: "主線：牛島＋海景午餐。Snoopy與山君不離保留為替代路線，避免同日全塞。",
                 items: [
-                    { time: "08:30", name: "Fritz Coffee Company 城山店", category: "Cafe", desc: "面對城山日出峰享用濃郁花生奶與麵包，大草地打卡。", tip: "早點到達人潮較少。", nav: "프ritz 성산 / 제주 서귀포시 성산읍 성산리 110" },
-                    { time: "09:40", name: "城山港 ➔ 牛島 (Udo) 深度遊", category: "景點", desc: "帶護照乘船前往牛島，租小型車漫遊，品嚐 Udo Sand 花生雪糕。", tip: "務必隨身攜帶護照！預留 3.5 小時。", nav: "성산포항종합여객터미널 / 064-782-5671" },
-                    { time: "14:00", name: "史努比庭園 (Snoopy Garden)", category: "景點/打卡", desc: "【牛島後最順路】從城山港開車 18 分鐘即達！午後漫步室內展館與 outdoor 森林庭園。", tip: "午後進場避開早起人潮，預留 1.5 - 2 小時。", nav: "스누피가든 / 064-790-2000" },
-                    { time: "16:20", name: "山君不離 (산굼부리) 金黃芒草", category: "花卉/景點", desc: "【順路 10 分鐘車程】極致震撼的火山口芒草海，精準捕捉 17:00 落日金光！", tip: "黃昏金光打在芒草上海景極夢幻。", nav: "산굼부리 / 064-783-9900" },
-                    { time: "18:00", name: "熟成到 咸德店 (숙성도 함덕점)", category: "美食", desc: "品嚐頂級濟州熟成豬肉，搭配酸菜與明太子醬汁。", tip: "【千萬別去中門店】咸德店吃完開車 3 分鐘就能回 MUIZE！", nav: "숙성도 함덕점 / 064-783-9951" },
-                    { time: "20:00", name: "返回 MUIZE 民宿休息", category: "住宿", desc: "返回 MUIZE 休息，夜間可至咸德海灘漫步。", tip: "咸德夜景極具氣氛且安全。", nav: "뮤이즈 / 0507-1335-3202" }
+                    {"time": "09:00", "name": "MUIZE 早餐後出發", "category": "交通", "desc": "吃過早餐再出發，往城山港預留約60–75分鐘車程及停車時間。", "tip": "不再要求08:30已到城山咖啡店。", "nav": "뮤이즈 → 성산포항종합여객터미널"},
+                    {"time": "10:30", "name": "城山港 ➔ 牛島 (Udo) 深度遊", "category": "景點", "desc": "預留約4–4.5小時，包含候船、渡輪、島上海景午餐、海岸散步與花生甜品；約14:30–15:00回程。", "tip": "帶護照，當天確認船班與風浪；租車留在城山港，不預設可開上島。", "nav": "성산포항종합여객터미널 / 064-782-5671"},
+                    {"time": "15:30", "name": "城山海邊咖啡／休息", "category": "Cafe/休息", "desc": "回到本島後坐下休息45–60分鐘；城山附近選一間當日有開的咖啡店即可，不指定未確認分店。", "tip": "若渡輪延誤或已疲累，直接回咸德。", "nav": "성산포항종합여객터미널"},
+                    {"time": "18:00", "name": "咸德自由晚餐", "category": "美食", "desc": "選住宿附近餐廳，吃完直接回民宿。熟成到可與Day 1晚餐交換。", "tip": "晚餐不必為指定名店長時間排隊。", "nav": "함덕해수욕장"},
+                    {"time": "19:30", "name": "返回 MUIZE 民宿休息", "category": "住宿", "desc": "回民宿休息、整理隔天退房行李。", "tip": "咸德夜景極具氣氛且安全。", "nav": "뮤이즈 / 0507-1335-3202"}
+                ],
+                options: [
+                    {"name": "替代整天：Snoopy Garden＋山君不離", "desc": "若不去牛島或停航：09:30出發 → 10:30–12:30 Snoopy → 午餐 → 14:30–15:30山君不離 → 回咸德。這是替代主線，不是牛島後追加；Snoopy官方建議約2小時，10–3月17:00最後入場。", "nav": "스누피가든 / 064-790-2000；산굼부리 / 064-783-9900"}
                 ]
             },
             3: {
-                title: "Day 3 (10/30)：1100賞楓 ➔ 節理帶 & The Cliff ➔ 實彈射擊 ➔ 粉紅草 ➔ Aewol The Sunset 夕陽 Check-in",
+                title: "Day 3 (10/30)：09:30退房：1100賞楓、The Cliff與實彈射擊",
                 stay: "Aewol The Sunset Pool Villa Resort (第 3 晚)",
+                pace: "跨區移動日｜Manor Blanc移至Day 4；柱狀節理改為可選，保留坐下吃飯和休息的時間。",
                 items: [
-                    { time: "09:30", name: "MUIZE 退房 (11:00前)", category: "交通", desc: "【11:00 前退房】辦理退房，行李放車上，開車往漢拏山 1100 道路方向前進。", tip: "提早出發，為中文區射擊體驗及回程預留時間；車程為估算，以當天導航為準。", nav: "뮤이즈 / 0507-1335-3202" },
-                    { time: "10:30", name: "1100道路 & 千王斷崖 (零體力賞楓)", category: "花卉/景點", desc: "車覽 1100 道路紅葉隧道，千王斷崖溪谷橋下車 1 分鐘看滿山紅葉。", tip: "完全不需爬山！坐在車內即可欣賞美景。", nav: "천왕사 (千王寺入口) / 064-748-2601" },
-                    { time: "12:00", name: "大浦海岸柱狀節理帶 & 中文區午餐", category: "美食/景點", desc: "先在中文區簡單午餐，再欣賞六角形海岸岩柱；今天不繞往西歸浦市中心偶來市場，集中遊覽中文區。", tip: "步道極平緩，景色極震撼。", nav: "주상절리대 / 064-738-1521" },
-                    { time: "13:15", name: "The Cliff Cafe & Pub (더클리프)", category: "Cafe", desc: "【峇里島風情 Cafe】距離節理帶 5 分鐘車程，戶外沙發區邊看衝浪邊享用冰沙與炸地瓜條。", tip: "無敵海景第一排，氛圍超放鬆。", nav: "더클리프 / 064-738-8866" },
-                    { time: "14:00", name: "濟州實彈射擊場 (Jeju Shooting Range)", category: "體驗", desc: "The Cliff 後往中文區西側，車程估計 10–15 分鐘；預留約 45–60 分鐘辦理登記、教練講解及體驗，再往 Manor Blanc，減少折返。地址：西歸浦市上磲洞 2802（中文區），道路地址 소보리당로164번길 62，3樓。", tip: "先致電確認營業及預約；帶護照，年滿14歲，勿飲酒並遵從教練指示。", nav: "제주실탄사격장 / 064-739-7007 / 제주 서귀포시 소보리당로164번길 62" },
-                    { time: "15:30", name: "Manor Blanc (마노르블랑) 粉紅草", category: "花卉", desc: "欣賞 10 月底最飽和夢幻的粉紅亂子草花海。", tip: "園區需購買飲料門票入場。", nav: "마노르블랑 / 064-794-0999" },
-                    { time: "17:00", name: "Aewol The Sunset 辦理入住 (15:00可)", category: "住宿/絕景", desc: "【15:00 後可入住】登記入住懸崖海景渡假村！在房內露台/陽台享用飲料迎著海景。", tip: "Manor Blanc 約停留45分鐘，回涯月車程預留45–60分鐘；如塞車，縮短花園停留以保留夕陽時間。", nav: "애월더선셋 / 064-799-5943" },
-                    { time: "17:15", name: "渡假村露台直擊涯月極致夕陽", category: "景點/絕景", desc: "全濟州最美的落日觀賞點，夕陽沉入大海，絕美粉紫晚霞。", tip: "準備好相機，絕佳打卡時刻！", nav: "애월더선셋 / 064-799-5943" },
-                    { time: "19:00", name: "豚舍豚 (돈사돈) 涯月店", category: "美食", desc: "享用炭火代烤黑豬肉或涯月在地海鮮餐。", tip: "距離渡假村僅需短途車程。", nav: "돈사돈 애월점 / 064-799-7343" }
+                    {"time": "09:30", "name": "MUIZE 退房 (11:00前)", "category": "交通", "desc": "【11:00 前退房】辦理退房，行李放車上，開車往漢拏山 1100 道路方向前進。", "tip": "維持09:30出發；若山路大霧或雨勢大，改走當天導航建議路線。", "nav": "뮤이즈 / 0507-1335-3202"},
+                    {"time": "10:45", "name": "1100道路方向短停賞秋景", "category": "花卉/景點", "desc": "1100道路方向賞秋景，選安全停車點短停約30分鐘，再往中文區；不把「千王斷崖」當作已確認的一分鐘步道。", "tip": "咸德至山區抓60–75分鐘；紅葉及山路視天氣，勿路邊隨意停車。", "nav": "천왕사 (千王寺入口) / 064-748-2601"},
+                    {"time": "12:15", "name": "中文區慢慢吃午餐", "category": "美食/休息", "desc": "午餐預留約1小時，停車、上洗手間都不用趕。", "tip": "今天集中中文區，不繞往西歸浦市中心市場。", "nav": "중문관광단지"},
+                    {"time": "13:30", "name": "The Cliff Cafe & Pub (더클리프)", "category": "Cafe", "desc": "海景Cafe預留約1小時，坐下休息後再去射擊場。", "tip": "射擊前勿飲酒；今天不趕著再跑粉紅草。", "nav": "더클리프 / 064-738-8866"},
+                    {"time": "15:00", "name": "濟州實彈射擊場 (Jeju Shooting Range)", "category": "體驗", "desc": "The Cliff後前往射擊場，車程估計10–20分鐘；登記、教練講解及體驗預留約1小時。地址：西歸浦市上磲洞2802／소보리당로164번길62，3樓。", "tip": "先致電確認營業及預約；帶護照，年滿14歲，勿飲酒並遵從教練指示。", "nav": "제주실탄사격장 / 064-739-7007 / 제주 서귀포시 소보리당로164번길 62"},
+                    {"time": "17:15", "name": "Aewol The Sunset 辦理入住 (15:00可)", "category": "住宿/絕景", "desc": "射擊後直接回涯月，車程抓60–75分鐘；入住後休息，若天色仍亮再欣賞海景，不趕日落打卡。", "tip": "15:00後可入住；時間以訂房確認為準，不保證趕得上日落。", "nav": "애월더선셋 / 064-799-5943"},
+                    {"time": "18:30", "name": "豚舍豚 (돈사돈) 涯月店", "category": "美食", "desc": "享用炭火代烤黑豬肉或涯月在地海鮮餐。", "tip": "預約或就近用餐；如已疲倦，可改外帶回住宿。", "nav": "돈사돈 애월점 / 064-799-7343"}
+                ],
+                options: [
+                    {"name": "柱狀節理：午餐前後二選一加站", "desc": "想看海岸岩柱可預留45–60分鐘，並縮短The Cliff停留；不要連同偶來市場一起追加。", "nav": "주상절리대 / 064-738-1521"}
                 ]
             },
             4: {
-                title: "Day 4 (10/31)：981 Park 賽車、採甘橘、渡假村 Spa 與牙帶魚",
+                title: "Day 4 (10/31)：西南慢遊：Manor Blanc粉紅草、茶園與回房休息",
                 stay: "Aewol The Sunset Pool Villa Resort (第 4 晚)",
+                pace: "只保留兩個主要園區｜採橘優先詢問Manor Blanc當日有否開放，避免另找農園來回。",
                 items: [
-                    { time: "09:30", name: "981 Park 科技主題樂園", category: "景點/體驗", desc: "駕駛無動力重力卡丁車俯瞰山海景，下載專屬飆車影片。", tip: "事前下載好 981 App 註冊更快速。", nav: "981파크 / 1833-9810" },
-                    { time: "11:30", name: "柑橘農園採甘橘體驗", category: "體驗/花卉", desc: "10 月底柑橘全面轉橙甜度最高，親自採摘並拍照。", tip: "現場提供可愛橘子帽子道具拍照。", nav: "제주감귤체험농장 / 064-792-2345" },
-                    { time: "13:00", name: "濟州堂 Cafe (제주당)", category: "Cafe/美食", desc: "超大工業風 Cafe，必吃玉米/紫薯造型麵包與炒年糕。", tip: "戶外大草地極度出片。", nav: "제주당 / 0507-1365-1234" },
-                    { time: "15:00", name: "晨星岳 (새별오름) 或 Osulloc", category: "景點/購物", desc: "近距離欣賞晨星岳芒草，或前往綠茶博物館採購綠茶保養品。", tip: "兩景點車程僅 10 分鐘。", nav: "오설록 티뮤지엄 / 064-794-5312" },
-                    { time: "16:30", name: "返回 Aewol The Sunset 享受設施", category: "住宿/渡假", desc: "享用房內海景 Spa 浴缸或 Pool Villa 泳池設施，享受渡假時光。", tip: "放慢腳步，盡情享受頂級 Villa。", nav: "애월더선셋 / 064-799-5943" },
-                    { time: "18:30", name: "涯月牙帶魚 (애월 갈치 암행어사)", category: "美食", desc: "享用超豐盛燉牙帶魚海鮮鍋與去骨香煎牙帶魚。", tip: "離渡假村車程約 8 分鐘。", nav: "애월갈치 암행어사 / 0507-1345-8890" }
+                    {"time": "09:30", "name": "早餐後從The Sunset出發", "category": "交通", "desc": "往安德面Manor Blanc預留約60–75分鐘車程，中途可按需要休息。", "tip": "今天不用趕981 Park，賽車已移至Day 5。", "nav": "애월더선셋 → 마노르블랑"},
+                    {"time": "10:45", "name": "Manor Blanc (마노르블랑) 粉紅草", "category": "花卉", "desc": "花園、粉紅草與咖啡預留約1.5小時，慢慢拍照。若當日提供採橘，可在同一園區體驗並延後午餐。", "tip": "粉紅草狀況及採橘季節要先確認；不保證10月底一定開放採摘。", "nav": "마노르블랑 / 064-794-0999"},
+                    {"time": "12:45", "name": "安德面午餐", "category": "美食/休息", "desc": "附近找午餐，留約1小時休息；若採橘時間較長，整段順延即可。", "tip": "不另插入遠處的午餐名店。", "nav": "안덕면"},
+                    {"time": "14:15", "name": "Osulloc茶博物館 & 茶園", "category": "景點/購物", "desc": "從Manor Blanc往茶園，車程估計20–30分鐘；茶點、買手信及茶園散步預留約1–1.5小時。", "tip": "以Osulloc為主；晨星岳只作替換，不兩處都去。", "nav": "오설록 티뮤지엄 / 제주 서귀포시 안덕면 신화역사로 15"},
+                    {"time": "16:45", "name": "返回 Aewol The Sunset 享受設施", "category": "住宿/渡假", "desc": "回涯月車程抓45–60分鐘；回房後留空白時間休息、使用住宿可用設施或海邊坐坐。", "tip": "泳池／Spa是否可用，以實際房型及住宿安排為準。", "nav": "애월더선셋 / 064-799-5943"},
+                    {"time": "18:30", "name": "涯月牙帶魚 (애월 갈치 암행어사)", "category": "美食", "desc": "享用超豐盛燉牙帶魚海鮮鍋與去骨香煎牙帶魚。", "tip": "離渡假村車程約 8 分鐘。", "nav": "애월갈치 암행어사 / 0507-1345-8890"}
+                ],
+                options: [
+                    {"name": "晨星岳：取代Osulloc", "desc": "若更想看芒草，可用晨星岳替換茶園，不再加一站；登坡需體力，可只看山腳景色。", "nav": "새별오름"},
+                    {"name": "漢潭散步＋藍大象／The Black Cafe", "desc": "若想留在涯月，可整個下午改為漢潭散步、購物或咖啡擇一，取代Osulloc；不要求全部完成。", "nav": "한담해안산책로；블루엘리펀트 애월；더블랙 카페"},
+                    {"name": "濟州堂Cafe：取代茶園下午茶", "desc": "若偏好麵包Cafe，可取代Osulloc；出發前查店家最新地址及營業，避免照舊資料繞路。", "nav": "제주당"}
                 ]
             },
             5: {
-                title: "Day 5 (11/01)：漢潭散步、黑芝麻 Latte、Noraba 海鮮麵與晚機返港",
+                title: "Day 5 (11/01)：981 Park、Noraba、東門市場，從西往市區返港",
                 stay: "溫暖的家 (HK Express UO641)",
+                pace: "把Day 1購物及Day 4賽車移來｜下午不再跑南部或東部，留出還車與登機緩衝。",
                 items: [
-                    { time: "09:30", name: "漢潭海岸散步道 (Handam Coast Trail)", category: "景點", desc: "直接從渡假村階梯下達散步道，沿著黑色火山岩海岸漫步。", tip: "從飯店步行 0 分鐘即可直達！", nav: "한담해안산책로 / 제주 제주시 애월읍 애월리 2493" },
-                    { time: "10:45", name: "Aewol The Sunset 退房 (11:00前)", category: "住宿", desc: "【11:00 前辦理退房】辦理退房手續，行李放車上，繼續慢遊涯月。", tip: "渡假村拍照打卡最後留念。", nav: "애월더선셋 / 064-799-5943" },
-                    { time: "11:00", name: "The Black Cafe", category: "Cafe", desc: "質感黑系 Cafe，必飲濃郁滑溜的黑芝麻奶蓋 Latte。", tip: "氛圍安靜高雅。", nav: "더블랙 카페 / 0507-1390-1122" },
-                    { time: "11:45", name: "藍大象眼鏡 (Blue Elephant)", category: "購物", desc: "選購質感眼鏡手信，體驗韓國時尚墨鏡款式。", tip: "位置就在涯月咖啡街附近。", nav: "블루엘리펀트 애월 / 070-8800-1234" },
-                    { time: "12:30", name: "Noraba 海鮮拉麵 (노라바)", category: "美食", desc: "漢潭／涯月咖啡街購物後，沿海岸往東到 Noraba（車程估計15–20分鐘），再繼續往機場方向。品嚐螃蟹、鮑魚與章魚海鮮麵，預留60–90分鐘含候位。地址：제주 제주시 애월읍 애월해안로 570-1。", tip: "避開14:00–15:00午休；章魚餐點可能售罄。舊文的구엄길100為舊址，出發前以店家最新定位確認。", nav: "노라바 / 0507-1360-1900 / 애월해안로 570-1" },
-                    { time: "17:30", name: "樂天租車點還車 ➔ 機場", category: "交通", desc: "午餐後自由活動；往機場方向慢遊，預留約30–40分鐘車程及加油時間，17:30前到樂天還車，再乘接駁車至機場。", tip: "18:00 前抵達機場辦理登機即可。", nav: "롯데렌터카 제주오토하우스 / 064-751-8000" },
-                    { time: "20:00", name: "搭乘 UO641 返港 (21:50 抵港)", category: "交通", desc: "帶著滿滿的回憶結束五日四夜濟州秋日之旅。", tip: "結束完美的濟州奢華渡假之行！", nav: "제주국제공항 / 064-797-2525" }
+                    {"time": "08:45", "name": "早餐、整理行李及提早退房", "category": "住宿/交通", "desc": "今天先退房，行李放車上，往981 Park車程抓25–35分鐘；不再折返住宿。", "tip": "11:00前退房；護照、貴重物品隨身帶，行李勿外露。", "nav": "애월더선셋 / 064-799-5943"},
+                    {"time": "09:30", "name": "981 Park 科技主題樂園", "category": "景點/體驗", "desc": "預留約2小時賽車及室內活動，11:30左右離場，再往Noraba，車程抓25–35分鐘。", "tip": "官網現列09:00開門；預訂早場、穿包腳平底鞋。天氣停駛就改漢潭散步或咖啡。", "nav": "981파크 / 1833-9810"},
+                    {"time": "12:15", "name": "Noraba 海鮮拉麵 (노라바)", "category": "美食", "desc": "預留約1小時午餐及候位，13:30左右離開，避開14:00–15:00午休。新址：애월해안로570-1。", "tip": "若12:45仍未入座或餐點售罄，改附近午餐，不為候位拖延午後。", "nav": "노라바 / 0507-1360-1900 / 애월해안로 570-1"},
+                    {"time": "14:30", "name": "七星街 & 東門市場 (1.5 小時)", "category": "購物/景點", "desc": "午餐後往濟州舊城區，車程抓40–50分鐘另加停車；預留約1.5小時逛東門市場，七星街有餘裕再去。", "tip": "16:00左右離開；市場只買易帶走手信，不再排長隊。", "nav": "동문재래시장 / 064-752-3001"},
+                    {"time": "16:00", "name": "出發加油、還車及機場接駁", "category": "交通", "desc": "往樂天還車中心抓30–45分鐘，另預留加油、檢查及接駁；目標17:00還車、17:30左右到機場。", "tip": "遇交通或排隊，先縮短市場；登機及行李截止以航空公司規定為準。", "nav": "롯데렌터카 제주오토하우스 / 064-751-8000"},
+                    {"time": "20:00", "name": "搭乘 UO641 返港 (21:50 抵港)", "category": "交通", "desc": "帶著滿滿的回憶結束五日四夜濟州秋日之旅。", "tip": "20:00航班以機票及航空公司最新通知為準。", "nav": "제주국제공항 / 064-797-2525"}
+                ],
+                options: [
+                    {"name": "981停駛／想更慢：漢潭與涯月咖啡", "desc": "用漢潭海岸散步、藍大象或The Black Cafe擇一替代981；午餐和機場緩衝不變，不把三間都補上。", "nav": "한담해안산책로；블루엘리펀트 애월；더블랙 카페"}
                 ]
             }
         };
 
         const mapPinsData = {
             1: [
-                { id: 1, name: "1. 濟州機場/樂天租車", x: 370, y: 195, drive: "起點", type: "transport", desc: "07:30 取車出發 (GPS: 064-751-8000)" },
-                { id: 2, name: "2. 你好鮑魚", x: 345, y: 190, drive: "🚗 10 分鐘", type: "food", desc: "鮑魚粥早餐/看飛機 (GPS: 064-749-8080)" },
-                { id: 3, name: "3. 彩虹海岸道路", x: 320, y: 195, drive: "🚗 8 分鐘", type: "spot", desc: "彩虹矮牆打卡 (GPS: 도두동무지개해안도로)" },
-                { id: 4, name: "4. Byronic Cafe", x: 300, y: 200, drive: "🚗 12 分鐘", type: "cafe", desc: "全黑海景 Cafe (GPS: 0507-1358-1647)" },
-                { id: 5, name: "5. 七星街 & 東門市場", x: 410, y: 195, drive: "🚗 15 分鐘", type: "shop", desc: "1.5h 快閃購物手信 (GPS: 064-752-3001)" },
-                { id: 6, name: "6. 咸德犀牛峰", x: 570, y: 185, drive: "🚗 25 分鐘", type: "spot", desc: "海景散步 (GPS: 서우봉)" },
-                { id: 7, name: "7. MUIZE 民宿 (入住)", x: 580, y: 195, drive: "🚗 3 分鐘", type: "hotel", desc: "16:00 Check-in (GPS: 0507-1335-3202)" },
-                { id: 8, name: "8. Woohwa 烤韓牛", x: 430, y: 215, drive: "🚗 20 分鐘", type: "food", desc: "蓮洞韓牛 (GPS: 0507-1321-2756)" }
+                {"id": 1, "name": "1. 機場／樂天取車", "x": 370, "y": 195, "drive": "起點", "type": "transport", "desc": "06:20抵達，取車時間有彈性"},
+                {"id": 2, "name": "2. 你好鮑魚", "x": 345, "y": 190, "drive": "約10–20分", "type": "food", "desc": "08:30早餐"},
+                {"id": 3, "name": "3. 彩虹海岸", "x": 320, "y": 195, "drive": "約10–15分", "type": "spot", "desc": "10:00短散步，可略過"},
+                {"id": 4, "name": "4. Byronic Cafe", "x": 300, "y": 200, "drive": "約10–20分", "type": "cafe", "desc": "11:00坐下休息，可略過"},
+                {"id": 5, "name": "5. 咸德海灘／午餐", "x": 570, "y": 185, "drive": "約45–60分", "type": "food", "desc": "12:30午餐，海邊自由時間"},
+                {"id": 6, "name": "6. MUIZE入住", "x": 580, "y": 195, "drive": "區內短程", "type": "hotel", "desc": "16:00入住及補眠"},
+                {"id": 7, "name": "7. 咸德晚餐", "x": 570, "y": 185, "drive": "區內短程", "type": "food", "desc": "18:30附近吃飯，省去來回市區"}
             ],
             2: [
-                { id: 1, name: "1. MUIZE 民宿出發", x: 580, y: 195, drive: "起點", type: "hotel", desc: "08:30 朝天咸德出發 (GPS: 0507-1335-3202)" },
-                { id: 2, name: "2. Fritz Coffee 城山店", x: 710, y: 220, drive: "🚗 35 分鐘", type: "cafe", desc: "花生奶/城山日出峰 (GPS: 프ritz 성산)" },
-                { id: 3, name: "3. 城山港 ➔ 牛島 Udo", x: 760, y: 210, drive: "🚗 5 分鐘+🚢15分", type: "spot", desc: "牛島花生雪糕慢遊 (GPS: 064-782-5671)" },
-                { id: 4, name: "4. Snoopy Garden", x: 620, y: 250, drive: "🚗 18 分鐘", type: "spot", desc: "史努比庭園打卡 (GPS: 064-790-2000)" },
-                { id: 5, name: "5. 山君不離 (芒草)", x: 520, y: 255, drive: "🚗 10 分鐘", type: "spot", desc: "17:00 落日芒草金光 (GPS: 064-783-9900)" },
-                { id: 6, name: "6. 熟成到 咸德店", x: 575, y: 190, drive: "🚗 20 分鐘", type: "food", desc: "濟州熟成黑豬肉 (GPS: 064-783-9951)" },
-                { id: 7, name: "7. 返回 MUIZE 民宿", x: 580, y: 195, drive: "🚗 3 分鐘", type: "hotel", desc: "返咸德宿第 2 晚 (GPS: 0507-1335-3202)" }
+                {"id": 1, "name": "1. MUIZE出發", "x": 580, "y": 195, "drive": "起點", "type": "hotel", "desc": "09:00早餐後出發"},
+                {"id": 2, "name": "2. 城山港", "x": 710, "y": 220, "drive": "約60–75分", "type": "transport", "desc": "留停車、購票、候船時間；帶護照"},
+                {"id": 3, "name": "3. 牛島慢遊", "x": 760, "y": 210, "drive": "船程約15分＋候船", "type": "spot", "desc": "10:30起，含午餐約4–4.5小時；不接兩個庭園"},
+                {"id": 4, "name": "4. 城山海邊休息", "x": 710, "y": 220, "drive": "渡輪＋候船", "type": "cafe", "desc": "15:30咖啡，可直接省略返民宿"},
+                {"id": 5, "name": "5. 返回咸德", "x": 580, "y": 195, "drive": "約60–75分", "type": "hotel", "desc": "18:00附近晚餐，19:30休息"}
             ],
             3: [
-                { id: 1, name: "1. MUIZE 民宿 退房", x: 580, y: 195, drive: "起點", type: "hotel", desc: "09:30 退房縱貫南下 (GPS: 0507-1335-3202)" },
-                { id: 2, name: "2. 1100道路賞楓 (千王斷崖)", x: 410, y: 260, drive: "🚗 40 分鐘", type: "spot", desc: "車覽 1100 公路紅葉 (GPS: 천왕사)" },
-                { id: 3, name: "3. 柱狀節理帶 & The Cliff", x: 360, y: 355, drive: "🚗 35 分鐘", type: "cafe", desc: "峇里島風 Cafe (GPS: 064-738-8866)" },
-                { id: 4, name: "4. 濟州實彈射擊場", x: 305, y: 340, drive: "🚗 約10–15分鐘", type: "spot", desc: "14:00 預留45–60分鐘；上磲洞2802／소보리당로164번길62 3樓 (GPS: 제주실탄사격장 / 064-739-7007)" },
-                { id: 5, name: "5. Manor Blanc 粉紅草", x: 220, y: 330, drive: "🚗 約15–25分鐘", type: "spot", desc: "夢幻粉紅亂子草 (GPS: 064-794-0999)" },
-                { id: 6, name: "6. Aewol The Sunset (入住)", x: 140, y: 235, drive: "🚗 約45–60分鐘", type: "hotel", desc: "17:00 Check-in (GPS: 064-799-5943)" },
-                { id: 7, name: "7. 豚舍豚 涯月店", x: 160, y: 260, drive: "🚗 10 分鐘", type: "food", desc: "炭火代烤黑豬肉 (GPS: 064-799-7343)" }
+                {"id": 1, "name": "1. MUIZE退房", "x": 580, "y": 195, "drive": "起點", "type": "hotel", "desc": "09:30出發"},
+                {"id": 2, "name": "2. 1100方向短停", "x": 410, "y": 260, "drive": "約60–75分", "type": "spot", "desc": "10:45短停約30分鐘，視天氣改道"},
+                {"id": 3, "name": "3. 中文區午餐／The Cliff", "x": 360, "y": 355, "drive": "約45–60分", "type": "cafe", "desc": "12:15午餐，13:30海景Cafe；柱狀節理為可選"},
+                {"id": 4, "name": "4. 濟州實彈射擊場", "x": 305, "y": 340, "drive": "約10–20分", "type": "spot", "desc": "15:00預留1小時；제주실탄사격장 / 064-739-7007"},
+                {"id": 5, "name": "5. The Sunset入住", "x": 140, "y": 235, "drive": "約60–75分", "type": "hotel", "desc": "17:15入住，不追趕日落"},
+                {"id": 6, "name": "6. 附近晚餐", "x": 160, "y": 260, "drive": "區內短程", "type": "food", "desc": "18:30豚舍豚或就近用餐"}
             ],
             4: [
-                { id: 1, name: "1. Aewol The Sunset 出發", x: 140, y: 235, drive: "起點", type: "hotel", desc: "09:15 涯月出發 (GPS: 064-799-5943)" },
-                { id: 2, name: "2. 981 Park 賽車", x: 230, y: 270, drive: "🚗 12 分鐘", type: "spot", desc: "重力卡丁車飆車 (GPS: 1833-9810)" },
-                { id: 3, name: "3. 柑橘農園 (採甘橘)", x: 210, y: 290, drive: "🚗 8 分鐘", type: "spot", desc: "採鮮柑橘體驗 (GPS: 제주감귤체험농장)" },
-                { id: 4, name: "4. 濟州堂 Cafe", x: 240, y: 285, drive: "🚗 10 分鐘", type: "cafe", desc: "工業風/造型麵包 (GPS: 0507-1365-1234)" },
-                { id: 5, name: "5. 晨星岳 或 Osulloc", x: 250, y: 300, drive: "🚗 10 分鐘", type: "spot", desc: "芒草/綠茶保養品 (GPS: 064-794-5312)" },
-                { id: 6, name: "6. 返回 Sunset 享用 Spa", x: 140, y: 235, drive: "🚗 15 分鐘", type: "hotel", desc: "懸崖 View 私人 Spa (GPS: 064-799-5943)" },
-                { id: 7, name: "7. 涯月牙帶魚晚餐", x: 155, y: 225, drive: "🚗 8 分鐘", type: "food", desc: "燉牙帶魚海鮮鍋 (GPS: 0507-1345-8890)" }
+                {"id": 1, "name": "1. The Sunset出發", "x": 140, "y": 235, "drive": "起點", "type": "hotel", "desc": "09:30早餐後出發"},
+                {"id": 2, "name": "2. Manor Blanc", "x": 220, "y": 330, "drive": "約60–75分", "type": "spot", "desc": "10:45花園；採橘如開放可同場體驗"},
+                {"id": 3, "name": "3. 安德午餐", "x": 220, "y": 330, "drive": "區內短程", "type": "food", "desc": "12:45午餐，時間可順延"},
+                {"id": 4, "name": "4. Osulloc茶園", "x": 200, "y": 310, "drive": "約20–30分", "type": "spot", "desc": "14:15茶點、手信、散步；晨星岳為替換"},
+                {"id": 5, "name": "5. 住宿休息", "x": 140, "y": 235, "drive": "約45–60分", "type": "hotel", "desc": "16:45回房，留空白時間"},
+                {"id": 6, "name": "6. 涯月牙帶魚", "x": 155, "y": 225, "drive": "區內短程", "type": "food", "desc": "18:30晚餐"}
             ],
             5: [
-                { id: 1, name: "1. Aewol The Sunset", x: 140, y: 235, drive: "起點", type: "hotel", desc: "直通漢潭海岸步道 (GPS: 한담해안산책로)" },
-                { id: 2, name: "2. The Black Cafe", x: 150, y: 220, drive: "🚗 5 分鐘", type: "cafe", desc: "黑芝麻奶蓋 Latte (GPS: 0507-1390-1122)" },
-                { id: 3, name: "3. 藍大象眼鏡手信", x: 155, y: 225, drive: "🚗 3 分鐘", type: "shop", desc: "韓系潮牌墨鏡 (GPS: 블루엘리펀트 애월)" },
-                { id: 4, name: "4. Noraba 海鮮拉麵", x: 230, y: 205, drive: "🚗 約15–20分鐘", type: "food", desc: "12:30 午餐，避開14:00–15:00午休；新址 애월해안로570-1 (GPS: 노라바 / 0507-1360-1900)" },
-                { id: 5, name: "5. 樂天還車 ➔ 濟州機場", x: 370, y: 195, drive: "🚗 約30–40分鐘", type: "transport", desc: "17:30 前抵達還車 (GPS: 064-751-8000)" },
-                { id: 6, name: "6. UO641 返港", x: 380, y: 175, drive: "✈️ 20:00 起飛", type: "transport", desc: "結束愉快之旅" }
+                {"id": 1, "name": "1. 提早退房", "x": 140, "y": 235, "drive": "起點", "type": "hotel", "desc": "08:45帶齊行李，不折返"},
+                {"id": 2, "name": "2. 981 Park", "x": 230, "y": 270, "drive": "約25–35分", "type": "spot", "desc": "09:30–11:30早場；1833-9810"},
+                {"id": 3, "name": "3. Noraba海鮮麵", "x": 230, "y": 205, "drive": "約25–35分", "type": "food", "desc": "12:15午餐；노라바 / 애월해안로570-1"},
+                {"id": 4, "name": "4. 東門市場／七星街", "x": 410, "y": 195, "drive": "約40–50分", "type": "shop", "desc": "14:30–16:00手信，先逛市場"},
+                {"id": 5, "name": "5. 加油／樂天還車", "x": 370, "y": 195, "drive": "約30–45分＋手續", "type": "transport", "desc": "16:00離開市區，目標17:00還車、17:30到機場"},
+                {"id": 6, "name": "6. UO641返港", "x": 370, "y": 195, "drive": "20:00起飛", "type": "transport", "desc": "預留登機緩衝，依機票確認"}
             ]
         };
 
@@ -349,14 +374,14 @@
             { cat: "花卉", name: "Manor Blanc (마노르블랑) 粉紅草", loc: "西南安德面", time: "09:00 - 18:30", off: "無", tip: "【GPS導航】064-794-0999 / 제주 서귀포시 안덕면 일주서로2100번길 46" },
             { cat: "美食", name: "豚舍豚 (돈사돈) 涯月店", loc: "西部/涯月", time: "12:30 - 22:00", off: "每週二", tip: "【GPS導航】064-799-7343 / 제주 제주시 애월읍 애월해안로 560" },
             { cat: "景點/體驗", name: "981 Park 科技主題樂園", loc: "涯月/西部", time: "09:00 - 18:20", off: "無", tip: "【GPS導航】1833-9810 / 제주 제주시 애월읍 천덕로 880-24" },
-            { cat: "體驗/花卉", name: "濟州柑橘體驗農園", loc: "翰林/安德", time: "09:00 - 17:00", off: "無", tip: "【GPS導航】제주감귤체험농장 / 064-792-2345" },
+            { cat: "體驗/花卉", name: "濟州柑橘體驗農園", loc: "翰林/安德", time: "09:00 - 17:00", off: "無", tip: "未指定農園，勿直接照舊電話導航；優先詢問Manor Blanc當季採橘是否開放，若無則省略" },
             { cat: "Cafe", name: "濟州堂 Cafe (제주당)", loc: "涯月/西部", time: "10:00 - 21:00", off: "無", tip: "【GPS導航】0507-1365-1234 / 제주 제주시 애월읍 평화로 2200" },
             { cat: "景點/購物", name: "Osulloc 茶博物館", loc: "西部安德面", time: "09:00 - 18:00", off: "無", tip: "【GPS導航】064-794-5312 / 제주 서귀포시 안덕면 신화역사로 15" },
             { cat: "美食", name: "涯月牙帶魚 (애월 갈치 암행어사)", loc: "涯月海岸", time: "10:30 - 21:30", off: "無", tip: "【GPS導航】0507-1345-8890 / 제주 제주시 애월읍 애월해안로 854" },
             { cat: "景點", name: "漢潭海岸散步道 (Handam)", loc: "涯月海岸", time: "24小時開放", off: "無", tip: "【GPS導航】한담해안산책로 / 제주 제주시 애월읍 애월리 2493" },
             { cat: "Cafe", name: "The Black Cafe", loc: "涯月海岸", time: "10:00 - 20:00", off: "無", tip: "【GPS導航】0507-1390-1122 / 제주 제주시 애월읍 애월로 11" },
             { cat: "購物", name: "藍大象眼鏡 (Blue Elephant)", loc: "涯月咖啡街", time: "11:00 - 20:00", off: "無", tip: "【GPS導航】블루엘리펀트 애월 / 제주 제주시 애월읍 애월로 1길 24-9" },
-            { cat: "體驗", name: "濟州實彈射擊場 (제주실탄사격장)", loc: "西歸浦中文區／上磲洞2802", time: "出發前致電確認（Day 3 14:00預留45–60分鐘）", off: "需向店家確認", tip: "【GPS導航】064-739-7007 / 소보리당로164번길 62，3樓。帶護照、14歲以上、勿飲酒。<a class='text-blue-600 underline' href='https://jejushootingrange.com/KR2/' target='_blank' rel='noopener'>官方資訊</a>" },
+            { cat: "體驗", name: "濟州實彈射擊場 (제주실탄사격장)", loc: "西歸浦中文區／上磲洞2802", time: "出發前致電確認（Day 3 15:00預留約1小時）", off: "需向店家確認", tip: "【GPS導航】064-739-7007 / 소보리당로164번길 62，3樓。帶護照、14歲以上、勿飲酒。<a class='text-blue-600 underline' href='https://jejushootingrange.com/KR2/' target='_blank' rel='noopener'>官方資訊</a>" },
             { cat: "美食", name: "Noraba 海鮮拉麵 (노라바)", loc: "涯月海岸／新嚴里", time: "平日10:00–17:00；週末10:00–17:30；午休14:00–15:00", off: "出發前確認臨時公休／售罄", tip: "【GPS導航】0507-1360-1900 / 애월해안로 570-1；勿沿用舊址구엄길100。最後點餐平日16:30／週末17:00。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000022664' target='_blank' rel='noopener'>Visit Jeju</a> · <a class='text-blue-600 underline' href='https://foodieteller.com/noraba/' target='_blank' rel='noopener'>食記</a>" }
         ];
 
@@ -390,6 +415,7 @@
                 <div class="border-b pb-4">
                     <div class="text-xs font-bold text-amber-600 uppercase tracking-wider">Day 0${dayNum} 行程</div>
                     <h2 class="text-xl font-bold text-slate-800 mt-0.5">${day.title}</h2>
+                    <p class="mt-3 text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg p-3">${day.pace}</p>
                     <div class="mt-2 text-xs inline-flex items-center bg-rose-50 text-rose-800 px-2.5 py-1 rounded-md border border-rose-200">
                         <i class="fa-solid fa-hotel mr-1.5"></i>當晚住宿：${day.stay}
                     </div>
@@ -431,6 +457,13 @@
             });
 
             html += `</div>`;
+            if (day.options?.length) {
+                html += `<div class="border-t pt-4 space-y-3"><h3 class="font-bold text-slate-700">隨心替換／可選，不是額外必跑清單</h3>`;
+                day.options.forEach(option => {
+                    html += `<div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><h4 class="font-bold text-sm">${option.name}</h4><p class="text-sm text-slate-600 mt-2">${option.desc}</p><p class="text-xs text-blue-700 mt-2">導航搜尋：${option.nav}</p></div>`;
+                });
+                html += `</div>`;
+            }
             document.getElementById('day-content').innerHTML = html;
         }
 
