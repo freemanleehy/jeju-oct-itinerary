@@ -69,7 +69,7 @@
             <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead><tr class="text-slate-500 border-b"><th class="py-2 pr-4">日期</th><th class="py-2 pr-4">主線</th><th class="py-2">放鬆安排</th></tr></thead><tbody class="divide-y divide-slate-100">
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 1 · 10/28</td><td class="py-2 pr-4">白馬燈塔 → Byronic／Hetras → 七星／東門 → 咸德</td><td class="py-2">14:15逛東門市場，15:00出發，16:00入住</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 2 · 10/29</td><td class="py-2 pr-4">Fritz → 牛島 → 城山日出峰 → 東福里購物／夢炭</td><td class="py-2">08:30出發；牛島短遊，貝果18:00關門前外帶</td></tr>
-                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 3 · 10/30</td><td class="py-2 pr-4">09:30退房 → 中文區 → 涯月</td><td class="py-2">The Cliff午餐＋咖啡，15:00射擊；粉紅草留待明天</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 3 · 10/30</td><td class="py-2 pr-4">09:30退房 → Snoopy早餐購物 → The Cliff → 涯月</td><td class="py-2">12:45午餐，15:00射擊；1100賞楓為可選</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 4 · 10/31</td><td class="py-2 pr-4">Manor Blanc → Osulloc → 濟州堂 → The Black</td><td class="py-2">13:45午餐，15:30海景咖啡放空75分鐘</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 5 · 11/01</td><td class="py-2 pr-4">981 → Noraba → 龍頭岩 → Antoinette → 機場</td><td class="py-2">下午龍頭岩短遊、咖啡休息；16:15出發還車</td></tr>
             </tbody></table></div>
@@ -95,7 +95,7 @@
             <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
                 <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：白馬燈塔／Byronic／七星／東門</button>
                 <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：Fritz／牛島／城山日出峰／夢炭</button>
-                <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：09:30退房／The Cliff／射擊</button>
+                <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：09:30退房／Snoopy早餐／The Cliff</button>
                 <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：粉紅草／茶園／濟州堂／The Black</button>
                 <button onclick="showDay(5)" id="daybtn-5" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 5：981／Noraba／龍頭岩／海景咖啡</button>
             </div>
@@ -265,18 +265,19 @@
                 ]
             },
             3: {
-                title: "Day 3 (10/30)：09:30退房：1100賞楓、The Cliff與實彈射擊",
+                title: "Day 3 (10/30)：09:30退房：Snoopy早餐購物、The Cliff午餐與射擊",
                 stay: "Aewol The Sunset Pool Villa Resort (第 3 晚)",
-                pace: "跨區移動日｜Manor Blanc移至Day 4；柱狀節理改為可選，12:15在The Cliff一次完成午餐與海景咖啡，保留坐下休息的時間。",
+                pace: "09:30退房 → 10:15 Snoopy早餐與短購物 → 12:45 The Cliff午餐 → 15:00射擊。1100賞楓改為可選，不為加站壓縮午餐或趕車。",
                 items: [
-                    {"time": "09:30", "name": "MUIZE 退房 (11:00前)", "category": "交通", "desc": "【11:00 前退房】辦理退房，行李放車上，開車往漢拏山 1100 道路方向前進。", "tip": "維持09:30出發；若山路大霧或雨勢大，改走當天導航建議路線。", "nav": "뮤이즈 / 0507-1335-3202"},
-                    {"time": "10:45", "name": "1100道路方向短停賞秋景", "category": "花卉/景點", "desc": "1100道路方向賞秋景，選安全停車點短停約30分鐘，再往中文區；不把「千王斷崖」當作已確認的一分鐘步道。", "tip": "咸德至山區抓60–75分鐘；紅葉及山路視天氣，勿路邊隨意停車。", "nav": "천왕사 (千王寺入口) / 064-748-2601"},
-                    {"time": "12:15", "name": "The Cliff Cafe & Pub 午餐＋海景咖啡", "category": "美食/Cafe/休息", "desc": "抵達中文區後直接到The Cliff吃午餐，再坐下喝咖啡、看海；12:15–14:30約2小時15分鐘，合併用餐與休息，不另跑午餐餐廳。", "tip": "餐點、供餐時段與候位以當日店家公告為準；14:30左右準備離開，之後前往射擊場，勿飲酒。", "nav": "더클리프 / 064-738-8866 / 제주 서귀포시 중문관광로154-17"},
+                    {"time": "09:30", "name": "MUIZE 退房 (11:00前)", "category": "交通", "desc": "09:30辦理退房，行李放車上，先往舊左邑Snoopy Garden的Café Snoopy與Peanuts Store；車程估計35–45分鐘。", "tip": "保留09:30出發；只安排早餐與短購物，不預設可在45分鐘內遊完整座庭園。", "nav": "뮤이즈 → 스누피가든 / 구좌읍 금백조로930"},
+                    {"time": "10:15", "name": "Café Snoopy 早餐＋Peanuts Store短購物", "category": "美食/Cafe/購物", "desc": "Snoopy Garden先以咖啡與當日可供應的早餐／輕食為主，再到Peanuts Store挑選紀念品；10:15–11:00約45分鐘，不安排完整園區遊覽。地址：구좌읍 금백조로930。", "tip": "咖啡店供餐時間、商店入口及是否需另購門票，先向現場確認；若現做餐點需久候，可改簡單輕食，約11:00出發往中文區。", "nav": "카페 스누피 / 피너츠 스토어 / 스누피가든 / 064-805-1118 / 구좌읍 금백조로930"},
+                    {"time": "12:45", "name": "The Cliff Cafe & Pub 午餐＋海景咖啡", "category": "美食/Cafe/休息", "desc": "Snoopy後往中文區，直達車程估計90–105分鐘，視當天導航選路；12:45–14:30在The Cliff吃午餐、喝咖啡及看海，不另換餐廳。", "tip": "餐點、供餐時段與候位以當日店家公告為準；14:30左右準備離開，之後前往射擊場，勿飲酒。", "nav": "더클리프 / 064-738-8866 / 제주 서귀포시 중문관광로154-17"},
                     {"time": "15:00", "name": "濟州實彈射擊場 (Jeju Shooting Range)", "category": "體驗", "desc": "The Cliff後前往射擊場，車程估計10–20分鐘；登記、教練講解及體驗預留約1小時。地址：西歸浦市上磲洞2802／소보리당로164번길62，3樓。", "tip": "先致電確認營業及預約；帶護照，年滿14歲，勿飲酒並遵從教練指示。", "nav": "제주실탄사격장 / 064-739-7007 / 제주 서귀포시 소보리당로164번길 62"},
                     {"time": "17:15", "name": "Aewol The Sunset 辦理入住 (15:00可)", "category": "住宿/絕景", "desc": "射擊後直接回涯月，車程抓60–75分鐘；入住後休息，若天色仍亮再欣賞海景，不趕日落打卡。", "tip": "15:00後可入住；時間以訂房確認為準，不保證趕得上日落。", "nav": "애월더선셋 / 064-799-5943"},
                     {"time": "18:30", "name": "豚舍豚 (돈사돈) 涯月店", "category": "美食", "desc": "享用炭火代烤黑豬肉或涯月在地海鮮餐。", "tip": "預約或就近用餐；如已疲倦，可改外帶回住宿。", "nav": "돈사돈 애월점 / 064-799-7343"}
                 ],
                 options: [
+                    {"name": "1100道路賞楓：視天氣及時間才改道", "desc": "早餐後以直達The Cliff為主。若非常想走1100道路，先查當天路況與導航總車程，只作安全停車點短停，並預計The Cliff午餐延至約13:30；若會影響15:00射擊，就省略賞楓，不趕山路。", "nav": "1100로；천왕사"},
                     {"name": "柱狀節理：午餐前後二選一加站", "desc": "想看海岸岩柱可預留45–60分鐘，並縮短The Cliff停留；不要連同偶來市場一起追加。", "nav": "주상절리대 / 064-738-1521"}
                 ]
             },
@@ -343,9 +344,9 @@
                 {"id": 9, "name": "9. 返回MUIZE", "x": 580, "y": 195, "drive": "約15–25分", "type": "hotel", "desc": "20:30回民宿；Day 3維持09:30出發"}
             ],
             3: [
-                {"id": 1, "name": "1. MUIZE退房", "x": 580, "y": 195, "drive": "起點", "type": "hotel", "desc": "09:30出發"},
-                {"id": 2, "name": "2. 1100方向短停", "x": 410, "y": 260, "drive": "約60–75分", "type": "spot", "desc": "10:45短停約30分鐘，視天氣改道"},
-                {"id": 3, "name": "3. The Cliff午餐＋咖啡", "x": 360, "y": 355, "drive": "約45–60分", "type": "cafe", "desc": "12:15–14:30午餐及海景咖啡；14:30左右離開，15:00射擊"},
+                {"id": 1, "name": "1. MUIZE退房", "x": 580, "y": 195, "drive": "起點", "type": "hotel", "desc": "09:30退房，先往Snoopy早餐與短購物"},
+                {"id": 2, "name": "2. Café Snoopy早餐／Peanuts Store", "x": 620, "y": 250, "drive": "約35–45分", "type": "cafe", "desc": "10:15–11:00早餐及短購物；스누피가든 / 금백조로930，不遊完整庭園"},
+                {"id": 3, "name": "3. The Cliff午餐＋咖啡", "x": 360, "y": 355, "drive": "約90–105分", "type": "cafe", "desc": "12:45–14:30午餐與海景咖啡；1100賞楓不納入主線，15:00射擊"},
                 {"id": 4, "name": "4. 濟州實彈射擊場", "x": 305, "y": 340, "drive": "約10–20分", "type": "spot", "desc": "15:00預留1小時；제주실탄사격장 / 064-739-7007"},
                 {"id": 5, "name": "5. The Sunset入住", "x": 140, "y": 235, "drive": "約60–75分", "type": "hotel", "desc": "17:15入住，不追趕日落"},
                 {"id": 6, "name": "6. 附近晚餐", "x": 160, "y": 260, "drive": "區內短程", "type": "food", "desc": "18:30豚舍豚或就近用餐"}
@@ -374,7 +375,7 @@
             { cat: "美食", name: "Woohwa 烤韓牛 (우화)", loc: "濟州市蓮洞", time: "17:00 - 24:00", off: "每週二", tip: "【GPS導航】0507-1321-2756 / 제주 제주시 신대로20길 46" },
             { cat: "住宿", name: "MUIZE (뮤이즈)", loc: "朝天邑咸德里", time: "Check-in 16:00 / Check-out 11:00", off: "無", tip: "【GPS導航】0507-1335-3202 / 제주 제주시 조천읍 함덕27길 22" },
             { cat: "住宿", name: "Aewol The Sunset Pool Villa Resort", loc: "涯月懸崖海景", time: "Check-in 15:00 / Check-out 11:00", off: "無", tip: "【GPS導航】064-799-5943 / 제주 제주시 애월읍 일주서로 6111" },
-            { cat: "Cafe", name: "The Cliff Cafe & Pub (더클리프)", loc: "西歸浦中文區", time: "10:00 - 01:00", off: "無", tip: "Day 3 12:15–14:30午餐＋海景咖啡；【GPS導航】064-738-8866 / 제주 서귀포시 중문관광로 154-17" },
+            { cat: "Cafe", name: "The Cliff Cafe & Pub (더클리프)", loc: "西歸浦中文區", time: "10:00 - 01:00", off: "無", tip: "Day 3 12:45–14:30午餐＋海景咖啡；【GPS導航】064-738-8866 / 제주 서귀포시 중문관광로 154-17" },
             { cat: "美食", name: "你好鮑魚 (안녕, 전복)", loc: "機場附近", time: "08:00 - 19:00", off: "無", tip: "【GPS導航】064-749-8080 / 제주 제주시 용해로 88" },
             { cat: "景點", name: "道頭洞彩虹海岸道路", loc: "濟州北部", time: "24小時開放", off: "無", tip: "【GPS導航】도두동무지개해안도로 / 제주 제주시 도두일동 1734" },
             { cat: "Cafe", name: "Byronic Espresso Bar", loc: "濟州北部", time: "10:00 - 19:00", off: "無", tip: "【GPS導航】0507-1358-1647 / 제주 제주시 테우해안로 96" },
@@ -409,7 +410,8 @@
             { cat: "美食", name: "夢炭 濟州（舊左店／몽탄 제주점）", loc: "舊左東福里（非涯月店）", time: "18:30為建議晚餐時間；營業及入場以店家確認為準", off: "訂位時確認", tip: "0507-1371-5592 / 구좌읍 동복로83，1樓。Catchtable查訂位；未代訂，不保證18:30有位。" },
             { cat: "景點/散步", name: "梨湖木筏海灘 Iho Tewoo Beach", loc: "機場西側北岸", time: "Day 1 09:30–10:00建議短停", off: "戶外散步視天氣", tip: "이호테우해수욕장 / 제주 제주시 도리로20；白馬燈塔海景；風浪大時不走防波堤，天氣不佳則省略。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_200000000007344' target='_blank' rel='noopener'>Visit Jeju</a>" },
             { cat: "Cafe", name: "Antoinette Yongdam (앙뚜아네트 용담점)", loc: "龍潭海岸／機場附近", time: "08:00–19:30；最後點餐19:20（Visit Jeju）", off: "出發前確認", tip: "Day 5 15:15–16:15咖啡放空；0507-1359-2243 / 제주 제주시 서해안로671。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_200000000008092' target='_blank' rel='noopener'>Visit Jeju</a>" },
-            { cat: "景點/散步", name: "龍頭岩 Yongduam Rock (용두암)", loc: "龍潭海岸／機場附近", time: "戶外觀景；Day 5 14:15–15:00建議短遊", off: "戶外視天氣", tip: "064-728-3917 / 제주 제주시 용두암길15；有台階與高低差，不必走到礁石下方。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500469' target='_blank' rel='noopener'>Visit Jeju</a>" }
+            { cat: "景點/散步", name: "龍頭岩 Yongduam Rock (용두암)", loc: "龍潭海岸／機場附近", time: "戶外觀景；Day 5 14:15–15:00建議短遊", off: "戶外視天氣", tip: "064-728-3917 / 제주 제주시 용두암길15；有台階與高低差，不必走到礁石下方。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500469' target='_blank' rel='noopener'>Visit Jeju</a>" },
+            { cat: "Cafe/購物", name: "Café Snoopy & Peanuts Store", loc: "舊左邑／Snoopy Garden", time: "Day 3 10:15–11:00；園區10–3月09:00–18:00，咖啡供餐另確認", off: "園區全年開放，店舖臨時調整出發前確認", tip: "스누피가든 / 카페 스누피 / 피너츠 스토어 / 064-805-1118 / 구좌읍 금백조로930。只吃早餐與短購物；入口、門票及供餐時間向現場確認。<a class='text-blue-600 underline' href='https://www.snoopygarden.com/gardenhouse' target='_blank' rel='noopener'>官方設施介紹</a>" }
         ];
 
         // --- RENDER FUNCTIONS ---
