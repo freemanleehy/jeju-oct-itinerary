@@ -67,7 +67,7 @@
         <div class="bg-white rounded-xl border border-slate-200 p-4 space-y-3">
             <h2 class="font-bold text-slate-800">五天節奏一覽</h2>
             <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead><tr class="text-slate-500 border-b"><th class="py-2 pr-4">日期</th><th class="py-2 pr-4">主線</th><th class="py-2">放鬆安排</th></tr></thead><tbody class="divide-y divide-slate-100">
-                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 1 · 10/28</td><td class="py-2 pr-4">北岸 → 咸德</td><td class="py-2">午餐後留白，入住補眠，晚餐不回市區</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 1 · 10/28</td><td class="py-2 pr-4">北岸 → Hetras → 七星街／Olive Young → 咸德</td><td class="py-2">15:00出發往咸德，16:00入住補眠</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 2 · 10/29</td><td class="py-2 pr-4">牛島慢遊</td><td class="py-2">庭園是替代路線，不在渡輪後追兩個景點</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 3 · 10/30</td><td class="py-2 pr-4">09:30退房 → 中文區 → 涯月</td><td class="py-2">The Cliff與射擊；粉紅草留待明天</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 4 · 10/31</td><td class="py-2 pr-4">Manor Blanc → Osulloc</td><td class="py-2">只逛兩個園區，傍晚回住宿休息</td></tr>
@@ -93,7 +93,7 @@
         <section id="sec-itinerary" class="space-y-4">
             <!-- Day Selectors -->
             <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
-                <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：北岸早餐／咸德休息</button>
+                <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：Byronic／Hetras／七星／Olive Young</button>
                 <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：牛島慢遊／庭園替代線</button>
                 <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：09:30退房／The Cliff／射擊</button>
                 <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：粉紅草／茶園／住宿休息</button>
@@ -222,16 +222,19 @@
         // --- DATA STRUCTURES ---
         const itineraryData = {
             1: {
-                title: "Day 1 (10/28)：落地慢慢來：北岸早餐、咸德海邊與補眠",
+                title: "Day 1 (10/28)：北岸早餐、Byronic、Hetras、七星街與Olive Young",
                 stay: "MUIZE 民宿 (朝天邑咸德里 / 第 1 晚)",
-                pace: "紅眼航班恢復日｜只走北岸，晚餐留在住宿附近。東門市場已移至Day 5。",
+                pace: "Byronic → Hetras Jeju → 七星街午餐與購物 → Olive Young → 16:00 MUIZE入住。東門市場主行程仍留Day 5，晚餐留在咸德。",
                 items: [
                     {"time": "06:20", "name": "抵達濟州國際機場 (UO676)", "category": "交通", "desc": "辦理入境手續、提取行李，前往租車接駁站。", "tip": "紅眼航班落地，可在機場洗漱整理。", "nav": "제주국제공항 / 064-797-2525"},
                     {"time": "07:30", "name": "樂天租車中心取車", "category": "交通", "desc": "搭乘 Shuttle Bus 自助辦理手續並取車。", "tip": "取車時間為估算，入境較慢就順延早餐；疲倦時先休息，勿勉強駕駛。", "nav": "롯데렌터카 제주오토하우스 / 064-751-8000"},
                     {"time": "08:30", "name": "你好鮑魚 (안녕, 전복)", "category": "美食", "desc": "早晨享用溫暖鮮甜的鮑魚粥與燒鮑魚，欣賞飛機起降。", "tip": "清晨人少，非常適合紅眼班機後的補充體力食物。", "nav": "안녕전복 / 064-749-8080"},
                     {"time": "10:00", "name": "道頭洞彩虹海岸道路", "category": "景點", "desc": "輕鬆散步約30–45分鐘；太累可直接跳過，今天不用逐站打卡。", "tip": "清晨光線柔和，拍海景極佳。", "nav": "도두동무지개해안도로 / 제주 제주시 도두일동 1734"},
                     {"time": "11:00", "name": "Byronic Espresso Bar Jeju", "category": "Cafe", "desc": "坐下喝咖啡、休息約1小時，按精神狀況決定停留長短。", "tip": "若疲倦，省略咖啡店，提早往咸德。", "nav": "바이러닉 에스프레소바 제주 / 0507-1358-1647"},
-                    {"time": "12:30", "name": "咸德午餐 & 海灘自由時間", "category": "美食/休息", "desc": "往東到咸德，車程抓45–60分鐘。午餐後海邊坐坐，入住前不安排爬坡或長途活動。", "tip": "可詢問民宿能否寄存行李；不假設可提早入住。", "nav": "함덕해수욕장"},
+                    {"time": "12:15", "name": "Hetras Jeju 香氛店 (헤트라스 제주)", "category": "購物", "desc": "Byronic後往蓮洞Hetras，車程估計20–30分鐘；試香及購物約45分鐘。官方地址：제주 제주시 신광로 22，1樓。", "tip": "官方列10:30–23:00；購物後再往七星街，兩區並非步行相鄰。", "nav": "헤트라스 제주 / 0507-1379-0101 / 제주 제주시 신광로 22"},
+                    {"time": "13:30", "name": "七星購物街 (칠성로) & 午餐", "category": "購物/美食", "desc": "Hetras後往濟州舊城區，車程估計20–30分鐘另加停車；附近午餐後逛七星街，預留約1小時。", "tip": "七星街與Olive Young安排同一輪停車，接著步行購物；先吃午餐再慢慢逛。", "nav": "칠성로쇼핑거리 / 제주 제주시 중앙로7길"},
+                    {"time": "14:30", "name": "Olive Young 東門市場店 (七星街附近)", "category": "購物", "desc": "七星街後步行前往Olive Young濟州東門市場店，預留約30分鐘購買護膚品和彩妝。地址：제주 제주시 관덕로 62-1。", "tip": "營業時間以店家當日公告為準；15:00左右回停車場出發，保留入住緩衝。", "nav": "올리브영 제주동문시장점 / 064-757-7300 / 제주 제주시 관덕로 62-1"},
+                    {"time": "15:00", "name": "出發前往咸德 MUIZE", "category": "交通", "desc": "購物後取車往咸德，連同步行回停車場及車程抓約45–60分鐘；今天不再加咸德海灘散步，16:00入住後補眠。", "tip": "如交通或購物延誤，縮短逛街時間；16:00入住以原訂單為準。", "nav": "뮤이즈 / 제주 제주시 조천읍 함덕27길 22"},
                     {"time": "16:00", "name": "MUIZE 民宿 準時 Check-in", "category": "住宿/休息", "desc": "入住後洗澡、補眠，預留至少2小時休息。", "tip": "16:00入住以原訂單為準。", "nav": "뮤이즈 / 제주 제주시 조천읍 함덕27길 22 (0507-1335-3202)"},
                     {"time": "18:30", "name": "熟成到 咸德店 (숙성도 함덕점)", "category": "美食", "desc": "品嚐頂級濟州熟成豬肉，搭配酸菜與明太子醬汁。", "tip": "留在咸德吃晚餐；若需長時間候位，改附近餐廳。", "nav": "숙성도 함덕점 / 064-783-9951"}
                 ],
@@ -298,7 +301,7 @@
                     {"time": "08:45", "name": "早餐、整理行李及提早退房", "category": "住宿/交通", "desc": "今天先退房，行李放車上，往981 Park車程抓25–35分鐘；不再折返住宿。", "tip": "11:00前退房；護照、貴重物品隨身帶，行李勿外露。", "nav": "애월더선셋 / 064-799-5943"},
                     {"time": "09:30", "name": "981 Park 科技主題樂園", "category": "景點/體驗", "desc": "預留約2小時賽車及室內活動，11:30左右離場，再往Noraba，車程抓25–35分鐘。", "tip": "官網現列09:00開門；預訂早場、穿包腳平底鞋。天氣停駛就改漢潭散步或咖啡。", "nav": "981파크 / 1833-9810"},
                     {"time": "12:15", "name": "Noraba 海鮮拉麵 (노라바)", "category": "美食", "desc": "預留約1小時午餐及候位，13:30左右離開，避開14:00–15:00午休。新址：애월해안로570-1。", "tip": "若12:45仍未入座或餐點售罄，改附近午餐，不為候位拖延午後。", "nav": "노라바 / 0507-1360-1900 / 애월해안로 570-1"},
-                    {"time": "14:30", "name": "七星街 & 東門市場 (1.5 小時)", "category": "購物/景點", "desc": "午餐後往濟州舊城區，車程抓40–50分鐘另加停車；預留約1.5小時逛東門市場，七星街有餘裕再去。", "tip": "16:00左右離開；市場只買易帶走手信，不再排長隊。", "nav": "동문재래시장 / 064-752-3001"},
+                    {"time": "14:30", "name": "東門市場 (1.5 小時)", "category": "購物/景點", "desc": "午餐後往濟州舊城區，車程抓40–50分鐘另加停車；預留約1.5小時逛東門市場；七星街與Olive Young已安排Day 1，今天不用重複逛。", "tip": "16:00左右離開；市場只買易帶走手信，不再排長隊。", "nav": "동문재래시장 / 064-752-3001"},
                     {"time": "16:00", "name": "出發加油、還車及機場接駁", "category": "交通", "desc": "往樂天還車中心抓30–45分鐘，另預留加油、檢查及接駁；目標17:00還車、17:30左右到機場。", "tip": "遇交通或排隊，先縮短市場；登機及行李截止以航空公司規定為準。", "nav": "롯데렌터카 제주오토하우스 / 064-751-8000"},
                     {"time": "20:00", "name": "搭乘 UO641 返港 (21:50 抵港)", "category": "交通", "desc": "帶著滿滿的回憶結束五日四夜濟州秋日之旅。", "tip": "20:00航班以機票及航空公司最新通知為準。", "nav": "제주국제공항 / 064-797-2525"}
                 ],
@@ -314,9 +317,11 @@
                 {"id": 2, "name": "2. 你好鮑魚", "x": 345, "y": 190, "drive": "約10–20分", "type": "food", "desc": "08:30早餐"},
                 {"id": 3, "name": "3. 彩虹海岸", "x": 320, "y": 195, "drive": "約10–15分", "type": "spot", "desc": "10:00短散步，可略過"},
                 {"id": 4, "name": "4. Byronic Cafe", "x": 300, "y": 200, "drive": "約10–20分", "type": "cafe", "desc": "11:00坐下休息，可略過"},
-                {"id": 5, "name": "5. 咸德海灘／午餐", "x": 570, "y": 185, "drive": "約45–60分", "type": "food", "desc": "12:30午餐，海邊自由時間"},
-                {"id": 6, "name": "6. MUIZE入住", "x": 580, "y": 195, "drive": "區內短程", "type": "hotel", "desc": "16:00入住及補眠"},
-                {"id": 7, "name": "7. 咸德晚餐", "x": 570, "y": 185, "drive": "區內短程", "type": "food", "desc": "18:30附近吃飯，省去來回市區"}
+                {"name": "5. Hetras Jeju", "x": 355, "y": 220, "drive": "約20–30分", "type": "shop", "desc": "12:15香氛購物；헤트라스 제주 / 신광로22", "id": 5},
+                {"name": "6. 七星街 & 午餐", "x": 405, "y": 190, "drive": "約20–30分＋停車", "type": "shop", "desc": "13:30午餐及購物；칠성로쇼핑거리", "id": 6},
+                {"name": "7. Olive Young 東門市場店", "x": 420, "y": 200, "drive": "步行約5–10分", "type": "shop", "desc": "14:30購物；올리브영 제주동문시장점 / 관덕로62-1", "id": 7},
+                {"name": "8. MUIZE入住", "x": 580, "y": 195, "drive": "約45–60分含取車", "type": "hotel", "desc": "15:00離開購物區，16:00入住補眠", "id": 8},
+                {"name": "9. 咸德晚餐", "x": 570, "y": 185, "drive": "區內短程", "type": "food", "desc": "18:30住宿附近用餐", "id": 9}
             ],
             2: [
                 {"id": 1, "name": "1. MUIZE出發", "x": 580, "y": 195, "drive": "起點", "type": "hotel", "desc": "09:00早餐後出發"},
@@ -345,7 +350,7 @@
                 {"id": 1, "name": "1. 提早退房", "x": 140, "y": 235, "drive": "起點", "type": "hotel", "desc": "08:45帶齊行李，不折返"},
                 {"id": 2, "name": "2. 981 Park", "x": 230, "y": 270, "drive": "約25–35分", "type": "spot", "desc": "09:30–11:30早場；1833-9810"},
                 {"id": 3, "name": "3. Noraba海鮮麵", "x": 230, "y": 205, "drive": "約25–35分", "type": "food", "desc": "12:15午餐；노라바 / 애월해안로570-1"},
-                {"id": 4, "name": "4. 東門市場／七星街", "x": 410, "y": 195, "drive": "約40–50分", "type": "shop", "desc": "14:30–16:00手信，先逛市場"},
+                {"id": 4, "name": "4. 東門市場", "x": 410, "y": 195, "drive": "約40–50分", "type": "shop", "desc": "14:30–16:00手信，先逛市場"},
                 {"id": 5, "name": "5. 加油／樂天還車", "x": 370, "y": 195, "drive": "約30–45分＋手續", "type": "transport", "desc": "16:00離開市區，目標17:00還車、17:30到機場"},
                 {"id": 6, "name": "6. UO641返港", "x": 370, "y": 195, "drive": "20:00起飛", "type": "transport", "desc": "預留登機緩衝，依機票確認"}
             ]
@@ -382,7 +387,9 @@
             { cat: "Cafe", name: "The Black Cafe", loc: "涯月海岸", time: "10:00 - 20:00", off: "無", tip: "【GPS導航】0507-1390-1122 / 제주 제주시 애월읍 애월로 11" },
             { cat: "購物", name: "藍大象眼鏡 (Blue Elephant)", loc: "涯月咖啡街", time: "11:00 - 20:00", off: "無", tip: "【GPS導航】블루엘리펀트 애월 / 제주 제주시 애월읍 애월로 1길 24-9" },
             { cat: "體驗", name: "濟州實彈射擊場 (제주실탄사격장)", loc: "西歸浦中文區／上磲洞2802", time: "出發前致電確認（Day 3 15:00預留約1小時）", off: "需向店家確認", tip: "【GPS導航】064-739-7007 / 소보리당로164번길 62，3樓。帶護照、14歲以上、勿飲酒。<a class='text-blue-600 underline' href='https://jejushootingrange.com/KR2/' target='_blank' rel='noopener'>官方資訊</a>" },
-            { cat: "美食", name: "Noraba 海鮮拉麵 (노라바)", loc: "涯月海岸／新嚴里", time: "平日10:00–17:00；週末10:00–17:30；午休14:00–15:00", off: "出發前確認臨時公休／售罄", tip: "【GPS導航】0507-1360-1900 / 애월해안로 570-1；勿沿用舊址구엄길100。最後點餐平日16:30／週末17:00。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000022664' target='_blank' rel='noopener'>Visit Jeju</a> · <a class='text-blue-600 underline' href='https://foodieteller.com/noraba/' target='_blank' rel='noopener'>食記</a>" }
+            { cat: "美食", name: "Noraba 海鮮拉麵 (노라바)", loc: "涯月海岸／新嚴里", time: "平日10:00–17:00；週末10:00–17:30；午休14:00–15:00", off: "出發前確認臨時公休／售罄", tip: "【GPS導航】0507-1360-1900 / 애월해안로 570-1；勿沿用舊址구엄길100。最後點餐平日16:30／週末17:00。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000022664' target='_blank' rel='noopener'>Visit Jeju</a> · <a class='text-blue-600 underline' href='https://foodieteller.com/noraba/' target='_blank' rel='noopener'>食記</a>" },
+            { cat: "購物", name: "Hetras Jeju (헤트라스 제주)", loc: "濟州市蓮洞", time: "10:30–23:00（官方店舖頁）", off: "出發前確認臨時調整", tip: "Day 1 12:15；0507-1379-0101 / 제주 제주시 신광로 22，1樓。<a class='text-blue-600 underline' href='https://m.hetras.co.kr/location?board_no=1002' target='_blank' rel='noopener'>官方門市資訊</a>" },
+            { cat: "購物", name: "Olive Young 東門市場店", loc: "七星街／東門市場附近", time: "出發前確認店家最新營業時間", off: "出發前確認", tip: "Day 1 14:30；올리브영 제주동문시장점 / 064-757-7300 / 제주 제주시 관덕로 62-1；與七星街步行串連。" }
         ];
 
         // --- RENDER FUNCTIONS ---
