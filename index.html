@@ -13,6 +13,8 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
+        .map-label:focus-visible { outline: 3px solid #f97316; outline-offset: 3px; }
+        .map-label-active { border-color: #f97316 !important; box-shadow: 0 0 0 2px #fed7aa; }
         .map-canvas-bg {
             background-color: #e5e3df;
         }
@@ -133,7 +135,7 @@
                         <h3 class="text-lg font-bold text-slate-800 flex items-center">
                             <i class="fa-solid fa-map text-amber-500 mr-2"></i>濟州島自駕導航動線圖 (非導航地圖)
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">只顯示每日主線；可選景點不納入連線。點擊標記查看建議時段，車程非即時路況。</p>
+                        <p class="text-xs text-slate-500 mt-0.5">每個編號直接列出地點全名；點擊名稱或標記查看時段。手機可左右滑動全圖；連線是行程示意，車程非即時路況。</p>
                     </div>
                     <div class="flex space-x-1 text-xs">
                         <button onclick="renderInteractiveMap(1)" id="mapday-1" class="mapday-btn bg-amber-500 text-white font-bold px-3 py-1.5 rounded-lg shadow">Day 1</button>
@@ -145,7 +147,8 @@
                 </div>
 
                 <!-- Google Maps Container -->
-                <div class="relative w-full h-[520px] rounded-2xl overflow-hidden border border-slate-300 shadow-inner map-canvas-bg select-none">
+                <div class="overflow-x-auto rounded-2xl" role="region" aria-label="每日主線示意圖，可左右滑動" tabindex="0">
+                <div class="relative w-full min-w-[800px] h-[520px] rounded-2xl overflow-hidden border border-slate-300 shadow-inner map-canvas-bg select-none">
                     
                     <!-- SVG Map Background Representation of Jeju Island -->
                     <svg class="absolute inset-0 w-full h-full" viewBox="0 0 800 500" preserveAspectRatio="none">
@@ -186,17 +189,12 @@
                         <!-- Dynamic Pins Injected Here -->
                     </div>
 
-                    <!-- Map Info Card -->
-                    <div id="map-info-card" class="absolute bottom-4 left-4 right-4 md:right-auto md:w-80 bg-white/95 backdrop-blur shadow-2xl rounded-xl p-4 border border-slate-200 transition-all duration-300 transform translate-y-0">
-                        <!-- Dynamic Info Injected Here -->
-                    </div>
-
-                    <!-- Map Legend Controls -->
-                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow border text-[11px] space-y-1">
-                        <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-rose-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">當天景點/餐廳</span></div>
-                        <div class="flex items-center space-x-1.5"><span class="w-3 h-3 bg-amber-500 rounded-full inline-block"></span><span class="font-bold text-slate-700">住宿飯店 (MUIZE/Sunset)</span></div>
-                        <div class="flex items-center space-x-1.5"><span class="w-3 h-1 bg-orange-500 inline-block"></span><span class="text-slate-500">Day 3跨區移動主線</span></div>
-                    </div>
+                </div>
+                </div>
+                <div id="map-info-card" class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm" aria-live="polite"></div>
+                <div class="flex flex-wrap gap-4 text-xs text-slate-600">
+                    <span>🔴 景點／餐飲　🟠 住宿　🔵 交通</span>
+                    <span>實線：主線順序；灰色虛線：名稱對應位置</span>
                 </div>
             </div>
         </section>
@@ -340,58 +338,58 @@
 
         const mapPinsData = {
             1: [
-                {"id":1,"name":"1. 機場／樂天取車","x":370,"y":195,"drive":"起點","type":"transport","desc":"06:20抵達，取車時間有彈性"},
-                {"id":2,"name":"2. 你好鮑魚","x":345,"y":190,"drive":"約10–20分","type":"food","desc":"08:30早餐"},
-                {"name":"3. 梨湖木筏海邊／白馬燈塔","x":300,"y":200,"drive":"約15–25分","type":"spot","desc":"09:30–10:00海邊看白馬燈塔；이호테우해수욕장 / 도리로20","id":3},
-                {"id":4,"name":"4. 彩虹海岸","x":320,"y":195,"drive":"約10–15分","type":"spot","desc":"10:15彩虹矮牆短停約10分鐘，可略過"},
-                {"id":5,"name":"5. Byronic Cafe","x":300,"y":200,"drive":"約10–20分","type":"cafe","desc":"10:45咖啡約30分鐘，11:15出發往Hetras"},
-                {"name":"6. Hetras Jeju","x":355,"y":220,"drive":"約20–30分","type":"shop","desc":"11:45香氛購物30分鐘；헤트라스 제주 / 신광로22","id":6},
-                {"name":"7. 七星街 & 午餐","x":405,"y":190,"drive":"約20–30分＋停車","type":"shop","desc":"12:45簡單午餐及重點購物","id":7},
+                {"id":1,"name":"1. 濟州國際機場／樂天租車中心","x":370,"y":195,"drive":"起點","type":"transport","desc":"06:20抵達，取車時間有彈性"},
+                {"id":2,"name":"2. 你好鮑魚（안녕, 전복）","x":345,"y":190,"drive":"約10–20分","type":"food","desc":"08:30早餐"},
+                {"name":"3. 梨湖木筏海邊・白馬燈塔","x":300,"y":200,"drive":"約15–25分","type":"spot","desc":"09:30–10:00海邊看白馬燈塔；이호테우해수욕장 / 도리로20","id":3},
+                {"id":4,"name":"4. 道頭洞彩虹海岸道路","x":320,"y":195,"drive":"約10–15分","type":"spot","desc":"10:15彩虹矮牆短停約10分鐘，可略過"},
+                {"id":5,"name":"5. Byronic Espresso Bar Jeju","x":300,"y":200,"drive":"約10–20分","type":"cafe","desc":"10:45咖啡約30分鐘，11:15出發往Hetras"},
+                {"name":"6. Hetras Jeju 香氛店","x":355,"y":220,"drive":"約20–30分","type":"shop","desc":"11:45香氛購物30分鐘；헤트라스 제주 / 신광로22","id":6},
+                {"name":"7. 七星購物街（칠성로）＆午餐","x":405,"y":190,"drive":"約20–30分＋停車","type":"shop","desc":"12:45簡單午餐及重點購物","id":7},
                 {"name":"8. Olive Young 東門市場店","x":420,"y":200,"drive":"步行約5–10分","type":"shop","desc":"13:45購物30分鐘，再步行往東門市場","id":8},
-                {"name":"9. 東門市場","x":430,"y":205,"drive":"步行短程","type":"shop","desc":"14:15–15:00約45分鐘；동문재래시장 / 관덕로14길20","id":9},
-                {"name":"10. MUIZE入住","x":580,"y":195,"drive":"約45–60分含取車","type":"hotel","desc":"15:00離開購物區，16:00入住補眠","id":10},
-                {"name":"11. 咸德晚餐","x":570,"y":185,"drive":"區內短程","type":"food","desc":"18:30住宿附近用餐","id":11}
+                {"name":"9. 東門市場（동문재래시장）","x":430,"y":205,"drive":"步行短程","type":"shop","desc":"14:15–15:00約45分鐘；동문재래시장 / 관덕로14길20","id":9},
+                {"name":"10. MUIZE 民宿｜入住","x":580,"y":195,"drive":"約45–60分含取車","type":"hotel","desc":"15:00離開購物區，16:00入住補眠","id":10},
+                {"name":"11. 熟成到 咸德店（숙성도 함덕점）","x":570,"y":185,"drive":"區內短程","type":"food","desc":"18:30住宿附近用餐","id":11}
             ],
             2: [
-                {"id":1,"name":"1. MUIZE出發","x":580,"y":195,"drive":"起點","type":"hotel","desc":"08:30出發，今天為全站緊湊路線"},
-                {"id":2,"name":"2. Fritz城山早餐","x":710,"y":230,"drive":"約60–75分","type":"cafe","desc":"09:45早餐；프릳츠 제주성산점 / 일출로222"},
-                {"id":3,"name":"3. 城山港","x":715,"y":215,"drive":"約10–15分＋停車","type":"transport","desc":"11:00辦理乘船，出航以當天船班為準"},
-                {"id":4,"name":"4. 牛島精選短遊","x":760,"y":210,"drive":"船程約15分＋候船","type":"spot","desc":"目標14:00回程、14:30返本島；含簡單午餐"},
-                {"id":5,"name":"5. 城山日出峰（山腳看景）","x":710,"y":230,"drive":"約10–15分＋停車","type":"spot","desc":"14:50–15:20短停30分鐘，不登頂；성산일출봉 / 일출로284-12"},
-                {"id":6,"name":"6. London Bagel Museum","x":560,"y":185,"drive":"約50–65分","type":"food","desc":"16:30外帶；동복로85；18:00關門，可能售罄"},
+                {"id":1,"name":"1. MUIZE 民宿｜出發","x":580,"y":195,"drive":"起點","type":"hotel","desc":"08:30出發，今天為全站緊湊路線"},
+                {"id":2,"name":"2. Fritz Coffee Company Seongsan","x":710,"y":230,"drive":"約60–75分","type":"cafe","desc":"09:45早餐；프릳츠 제주성산점 / 일출로222"},
+                {"id":3,"name":"3. 城山浦港綜合客運碼頭","x":715,"y":215,"drive":"約10–15分＋停車","type":"transport","desc":"11:00辦理乘船，出航以當天船班為準"},
+                {"id":4,"name":"4. 牛島 Udo｜海女村・Udo Sand・下古水洞","x":760,"y":210,"drive":"船程約15分＋候船","type":"spot","desc":"目標14:00回程、14:30返本島；含簡單午餐"},
+                {"id":5,"name":"5. 城山日出峰｜山腳觀景","x":710,"y":230,"drive":"約10–15分＋停車","type":"spot","desc":"14:50–15:20短停30分鐘，不登頂；성산일출봉 / 일출로284-12"},
+                {"id":6,"name":"6. London Bagel Museum Jeju","x":560,"y":185,"drive":"約50–65分","type":"food","desc":"16:30外帶；동복로85；18:00關門，可能售罄"},
                 {"id":7,"name":"7. BLUE ELEPHANT SPACE JEJU","x":550,"y":195,"drive":"步行短程","type":"shop","desc":"17:10購物；동복로83；官方19:00關門"},
-                {"id":8,"name":"8. 夢炭 濟州舊左店","x":555,"y":205,"drive":"步行短程","type":"food","desc":"18:30晚餐，須自行確認訂位；동복로83"},
-                {"id":9,"name":"9. 返回MUIZE","x":580,"y":195,"drive":"約15–25分","type":"hotel","desc":"20:30回民宿；Day 3維持09:30出發"}
+                {"id":8,"name":"8. 夢炭 濟州（舊左店）","x":555,"y":205,"drive":"步行短程","type":"food","desc":"18:30晚餐，須自行確認訂位；동복로83"},
+                {"id":9,"name":"9. MUIZE 民宿｜返回","x":580,"y":195,"drive":"約15–25分","type":"hotel","desc":"20:30回民宿；Day 3維持09:30出發"}
             ],
             3: [
-                {"id":1,"name":"1. MUIZE退房","x":580,"y":195,"drive":"起點","type":"hotel","desc":"09:30退房，先往Snoopy早餐與短購物"},
-                {"id":2,"name":"2. Café Snoopy早餐／Peanuts Store","x":620,"y":250,"drive":"約35–45分","type":"cafe","desc":"10:15–11:00早餐及短購物；스누피가든 / 금백조로930，不遊完整庭園"},
-                {"id":3,"name":"3. 山君不離芒草","x":520,"y":255,"drive":"約15–20分","type":"spot","desc":"🌾 11:20–12:00秋季芒草與火山口；非當週花況實測"},
-                {"name":"4. 1100道路秋景／1100高地","x":410,"y":260,"drive":"約75–90分","type":"spot","desc":"🍁 13:30–14:00秋景主線必到；1100고지 휴게소 / 1100로1555","id":4},
-                {"id":5,"name":"5. The Cliff午餐＋咖啡","x":360,"y":355,"drive":"約40–45分","type":"cafe","desc":"14:45–15:45較晚午餐與海景咖啡"},
-                {"id":6,"name":"6. 濟州實彈射擊場","x":305,"y":340,"drive":"約10–20分","type":"spot","desc":"16:15–17:15射擊體驗，先確認營業與預約"},
-                {"id":7,"name":"7. The Sunset入住","x":140,"y":235,"drive":"約60–75分","type":"hotel","desc":"約18:30入住休息"},
-                {"id":8,"name":"8. 附近晚餐","x":160,"y":260,"drive":"區內短程","type":"food","desc":"19:30豚舍豚或就近晚餐"}
+                {"id":1,"name":"1. MUIZE 民宿｜退房","x":580,"y":195,"drive":"起點","type":"hotel","desc":"09:30退房，先往Snoopy早餐與短購物"},
+                {"id":2,"name":"2. Café Snoopy ＆ Peanuts Store","x":620,"y":250,"drive":"約35–45分","type":"cafe","desc":"10:15–11:00早餐及短購物；스누피가든 / 금백조로930，不遊完整庭園"},
+                {"id":3,"name":"3. 山君不離 Sangumburi","x":520,"y":255,"drive":"約15–20分","type":"spot","desc":"🌾 11:20–12:00秋季芒草與火山口；非當週花況實測"},
+                {"name":"4. 1100 Road／1100高地休息站","x":410,"y":260,"drive":"約75–90分","type":"spot","desc":"🍁 13:30–14:00秋景主線必到；1100고지 휴게소 / 1100로1555","id":4},
+                {"id":5,"name":"5. The Cliff Cafe & Pub","x":360,"y":355,"drive":"約40–45分","type":"cafe","desc":"14:45–15:45較晚午餐與海景咖啡"},
+                {"id":6,"name":"6. 濟州實彈射擊場（Jeju Shooting Range）","x":305,"y":340,"drive":"約10–20分","type":"spot","desc":"16:15–17:15射擊體驗，先確認營業與預約"},
+                {"id":7,"name":"7. Aewol The Sunset Pool Villa Resort｜入住","x":140,"y":235,"drive":"約60–75分","type":"hotel","desc":"約18:30入住休息"},
+                {"id":8,"name":"8. 豚舍豚 涯月店（돈사돈）","x":160,"y":260,"drive":"區內短程","type":"food","desc":"19:30豚舍豚或就近晚餐"}
             ],
             4: [
-                {"id":1,"name":"1. The Sunset出發","x":140,"y":235,"drive":"起點","type":"hotel","desc":"08:15從酒店出發吃早餐，今天不退房"},
-                {"name":"2. 宇榮潭鮑魚早餐","x":160,"y":240,"drive":"約5–15分","type":"food","desc":"08:30–09:15；전복죽／전복돌솥밥；애월로86，08:00開門","id":2},
-                {"id":3,"name":"3. Manor Blanc","x":220,"y":330,"drive":"約60–75分","type":"spot","desc":"🌸 10:45–11:45粉紅草；有10/9訪客紀錄，非當日保證"},
-                {"id":4,"name":"4. 晨星岳山腳芒草","x":250,"y":285,"drive":"約45–60分","type":"spot","desc":"🌾 12:45–13:15芒草短停，不登頂；停車擠塞則省略"},
-                {"id":5,"name":"5. 濟州堂午餐","x":235,"y":285,"drive":"約15–25分＋停車","type":"food","desc":"13:45–14:45；제주당 / 월각로927"},
-                {"id":6,"name":"6. The Black Cafe","x":150,"y":220,"drive":"約30–40分＋停車","type":"cafe","desc":"15:30–16:45喝咖啡與休息；해지개더블랙 / 애월북서길54"},
-                {"id":7,"name":"7. 住宿休息","x":140,"y":235,"drive":"約10–15分","type":"hotel","desc":"17:00回房，晚餐前休息"},
-                {"id":8,"name":"8. 涯月牙帶魚","x":155,"y":225,"drive":"區內短程","type":"food","desc":"18:30晚餐"}
+                {"id":1,"name":"1. Aewol The Sunset Pool Villa Resort｜出發","x":140,"y":235,"drive":"起點","type":"hotel","desc":"08:15從酒店出發吃早餐，今天不退房"},
+                {"name":"2. 宇榮潭鮑魚料理（우영담）","x":160,"y":240,"drive":"約5–15分","type":"food","desc":"08:30–09:15；전복죽／전복돌솥밥；애월로86，08:00開門","id":2},
+                {"id":3,"name":"3. Manor Blanc（마노르블랑）","x":220,"y":330,"drive":"約60–75分","type":"spot","desc":"🌸 10:45–11:45粉紅草；有10/9訪客紀錄，非當日保證"},
+                {"id":4,"name":"4. 晨星岳 Saebyeol Oreum｜山腳芒草","x":250,"y":285,"drive":"約45–60分","type":"spot","desc":"🌾 12:45–13:15芒草短停，不登頂；停車擠塞則省略"},
+                {"id":5,"name":"5. 濟州堂 Jejudang（제주당）","x":235,"y":285,"drive":"約15–25分＋停車","type":"food","desc":"13:45–14:45；제주당 / 월각로927"},
+                {"id":6,"name":"6. The Black Cafe（해지개더블랙）","x":150,"y":220,"drive":"約30–40分＋停車","type":"cafe","desc":"15:30–16:45喝咖啡與休息；해지개더블랙 / 애월북서길54"},
+                {"id":7,"name":"7. Aewol The Sunset Pool Villa Resort｜休息","x":140,"y":235,"drive":"約10–15分","type":"hotel","desc":"17:00回房，晚餐前休息"},
+                {"id":8,"name":"8. 涯月牙帶魚（애월 갈치 암행어사）","x":155,"y":225,"drive":"區內短程","type":"food","desc":"18:30晚餐"}
             ],
             5: [
-                {"id":1,"name":"1. 提早退房","x":140,"y":235,"drive":"起點","type":"hotel","desc":"08:15退房帶齊行李，先吃早餐再去981"},
-                {"name":"2. 海螺之家早餐","x":270,"y":260,"drive":"約25–30分","type":"food","desc":"08:45–09:20海螺粥／刀切湯麵；유수암평화5길51，08:00開門","id":2},
-                {"id":3,"name":"3. 981 Park","x":230,"y":270,"drive":"約15–20分","type":"spot","desc":"09:45–11:45賽車；1833-9810"},
-                {"id":4,"name":"4. Noraba海鮮麵","x":230,"y":205,"drive":"約25–35分","type":"food","desc":"12:30午餐；노라바 / 애월해안로570-1"},
+                {"id":1,"name":"1. Aewol The Sunset Pool Villa Resort｜退房","x":140,"y":235,"drive":"起點","type":"hotel","desc":"08:15退房帶齊行李，先吃早餐再去981"},
+                {"name":"2. 海螺之家（보말이네／Bomaline）","x":270,"y":260,"drive":"約25–30分","type":"food","desc":"08:45–09:20海螺粥／刀切湯麵；유수암평화5길51，08:00開門","id":2},
+                {"id":3,"name":"3. 981 Park 科技主題樂園","x":230,"y":270,"drive":"約15–20分","type":"spot","desc":"09:45–11:45賽車；1833-9810"},
+                {"id":4,"name":"4. Noraba 海鮮拉麵（노라바）","x":230,"y":205,"drive":"約25–35分","type":"food","desc":"12:30午餐；노라바 / 애월해안로570-1"},
                 {"name":"5. 龍頭岩 Yongduam Rock","x":385,"y":180,"drive":"約30–40分＋停車","type":"spot","desc":"14:15–15:00海岸觀景短遊；용두암 / 용두암길15","id":5},
-                {"name":"6. Antoinette Yongdam","x":360,"y":180,"drive":"約5–10分＋停車","type":"cafe","desc":"15:15–16:15海景咖啡休息；앙뚜아네트 용담점 / 서해안로671","id":6},
-                {"id":7,"name":"7. 加油／樂天還車","x":370,"y":195,"drive":"約15–25分＋手續","type":"transport","desc":"16:15離開咖啡店；目標17:00還車、17:30機場"},
-                {"id":8,"name":"8. UO641返港","x":370,"y":195,"drive":"20:00起飛","type":"transport","desc":"預留登機緩衝，依機票確認"}
+                {"name":"6. Antoinette Yongdam（앙뚜아네트 용담점）","x":360,"y":180,"drive":"約5–10分＋停車","type":"cafe","desc":"15:15–16:15海景咖啡休息；앙뚜아네트 용담점 / 서해안로671","id":6},
+                {"id":7,"name":"7. 樂天租車還車中心｜加油・還車","x":370,"y":195,"drive":"約15–25分＋手續","type":"transport","desc":"16:15離開咖啡店；目標17:00還車、17:30機場"},
+                {"id":8,"name":"8. 濟州國際機場｜UO641返港","x":370,"y":195,"drive":"20:00起飛","type":"transport","desc":"預留登機緩衝，依機票確認"}
             ]
         };
 
@@ -551,6 +549,17 @@
                 <path d="${dPath}" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,4" stroke-linecap="round"/>
             `;
 
+            const labelPositions = new Map();
+            const split = Math.ceil(pins.length / 2);
+            pins.forEach((pin, i) => {
+                const left = i < split;
+                const row = left ? i : i - split;
+                labelPositions.set(pin.id, { left, y: 58 + row * 72 });
+            });
+            svgRouteLayer.innerHTML += pins.map(pin => {
+                const label = labelPositions.get(pin.id);
+                return `<path d="M ${pin.x} ${pin.y} L ${label.left ? 256 : 544} ${label.y}" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,4" opacity="0.65"/>`;
+            }).join('');
             let pinsHtml = "";
             pins.forEach((pin, i) => {
                 let bgColor = "bg-rose-600";
@@ -561,6 +570,9 @@
                 const leftPercent = (pin.x / 800) * 100;
                 const topPercent = (pin.y / 500) * 100;
 
+                const label = labelPositions.get(pin.id);
+                const placeName = pin.name.replace(/^\d+\.\s*/, '');
+                pinsHtml += `<button type="button" onclick="selectPin(${dayNum}, ${pin.id})" id="label-${pin.id}" class="map-label absolute pointer-events-auto flex items-center gap-2 bg-white/95 border-2 border-slate-300 rounded-lg px-2 py-1.5 text-left text-xs font-semibold text-slate-800 shadow-sm" style="${label.left ? 'left' : 'right'}: 2%; top: ${(label.y - 29) / 500 * 100}%; width: 30%; min-height: 58px; z-index: 40;" aria-label="${pin.name}"><span class="${bgColor} text-white rounded-full shrink-0 w-6 h-6 inline-flex items-center justify-center">${pin.id}</span><span style="overflow-wrap:anywhere">${placeName}</span></button>`;
                 pinsHtml += `
                     <div onclick="selectPin(${dayNum}, ${pin.id})" id="pin-${pin.id}" class="map-pin absolute pointer-events-auto flex flex-col items-center" style="left: ${leftPercent}%; top: ${topPercent}%; transform: translate(-50%, -100%); z-index: ${10 + i};">
                         <div class="${bgColor} text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-lg border-2 border-white flex items-center space-x-1 whitespace-nowrap">
@@ -581,8 +593,11 @@
             const card = document.getElementById('map-info-card');
 
             document.querySelectorAll('.map-pin').forEach(el => el.classList.remove('map-pin-active'));
+            document.querySelectorAll('.map-label').forEach(el => el.classList.remove('map-label-active'));
             const activeEl = document.getElementById(`pin-${pinId}`);
             if(activeEl) activeEl.classList.add('map-pin-active');
+            const activeLabel = document.getElementById(`label-${pinId}`);
+            if(activeLabel) activeLabel.classList.add('map-label-active');
 
             let typeText = "景點/打卡";
             if(pin.type === 'hotel') typeText = "住宿/民宿";
