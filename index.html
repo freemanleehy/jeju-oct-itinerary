@@ -68,7 +68,7 @@
             <h2 class="font-bold text-slate-800">五天節奏一覽</h2>
             <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead><tr class="text-slate-500 border-b"><th class="py-2 pr-4">日期</th><th class="py-2 pr-4">主線</th><th class="py-2">放鬆安排</th></tr></thead><tbody class="divide-y divide-slate-100">
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 1 · 10/28</td><td class="py-2 pr-4">白馬燈塔 → Byronic／Hetras → 七星／東門 → 咸德</td><td class="py-2">14:15逛東門市場，15:00出發，16:00入住</td></tr>
-                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 2 · 10/29</td><td class="py-2 pr-4">Fritz → 牛島 → Snoopy → 東福里購物／夢炭</td><td class="py-2">08:30出發；牛島短遊，貝果18:00關門前外帶</td></tr>
+                <tr><td class="py-2 pr-4 whitespace-nowrap">Day 2 · 10/29</td><td class="py-2 pr-4">Fritz → 牛島 → 城山日出峰 → 東福里購物／夢炭</td><td class="py-2">08:30出發；牛島短遊，貝果18:00關門前外帶</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 3 · 10/30</td><td class="py-2 pr-4">09:30退房 → 中文區 → 涯月</td><td class="py-2">The Cliff與射擊；粉紅草留待明天</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 4 · 10/31</td><td class="py-2 pr-4">Manor Blanc → Osulloc → 濟州堂 → The Black</td><td class="py-2">13:45午餐，15:30海景咖啡放空75分鐘</td></tr>
                 <tr><td class="py-2 pr-4 whitespace-nowrap">Day 5 · 11/01</td><td class="py-2 pr-4">981 → Noraba → 龍頭岩 → Antoinette → 機場</td><td class="py-2">下午龍頭岩短遊、咖啡休息；16:15出發還車</td></tr>
@@ -94,7 +94,7 @@
             <!-- Day Selectors -->
             <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
                 <button onclick="showDay(1)" id="daybtn-1" class="day-btn bg-amber-500 text-white font-bold px-4 py-2 rounded-lg text-sm shadow">Day 1：白馬燈塔／Byronic／七星／東門</button>
-                <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：Fritz／牛島／Snoopy／貝果／夢炭</button>
+                <button onclick="showDay(2)" id="daybtn-2" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 2：Fritz／牛島／城山日出峰／夢炭</button>
                 <button onclick="showDay(3)" id="daybtn-3" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 3：09:30退房／The Cliff／射擊</button>
                 <button onclick="showDay(4)" id="daybtn-4" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 4：粉紅草／茶園／濟州堂／The Black</button>
                 <button onclick="showDay(5)" id="daybtn-5" class="day-btn bg-white text-slate-600 font-medium px-4 py-2 rounded-lg text-sm border hover:bg-slate-50">Day 5：981／Noraba／龍頭岩／海景咖啡</button>
@@ -246,22 +246,22 @@
                 ]
             },
             2: {
-                title: "Day 2 (10/29)：Fritz早餐、牛島、Snoopy、貝果、BLUE ELEPHANT與夢炭",
+                title: "Day 2 (10/29)：Fritz早餐、牛島、城山日出峰、貝果、BLUE ELEPHANT與夢炭",
                 stay: "MUIZE 民宿 (朝天邑咸德里 / 第 2 晚)",
-                pace: "指定全站路線｜08:30出發、牛島精選短遊；14:30前返本島，16:00離開Snoopy。貝果外帶不保證存貨；夢炭18:30須自行確認訂位。",
+                pace: "指定全站路線｜08:30出發、牛島精選短遊；目標14:30返本島，14:50城山日出峰山腳短停30分鐘，不登頂。貝果外帶不保證存貨；夢炭18:30須自行確認訂位。",
                 items: [
                     {"time": "08:30", "name": "MUIZE 出發往城山", "category": "交通", "desc": "酒店出發後往Fritz城山店，車程估計60–75分鐘；今天保留所有指定站點，08:30離開酒店。", "tip": "這是較緊湊的一天；車程、船班與候位均可能令時間順延。", "nav": "뮤이즈 → 프릳츠 제주성산점"},
                     {"time": "09:45", "name": "Fritz Coffee Company Seongsan 早餐", "category": "Cafe/美食", "desc": "海景咖啡與麵包早餐，預留約45分鐘；10:30左右出發往城山港，車程抓10–15分鐘另加停車。", "tip": "分店為프릳츠 제주성산점；地址일출로222，勿沿用舊版성산리110。", "nav": "프릳츠 제주성산점 / 제주 서귀포시 성산읍 일출로 222"},
                     {"time": "11:00", "name": "城山港 ➔ 牛島 (Udo) 精選半日遊", "category": "景點", "desc": "11:00到港辦理購票、候船，目標約11:30出航。島上選一段海岸散步、簡單午餐與花生甜品，目標14:00左右回程、14:30前返本島；今天不安排環島深度遊。", "tip": "帶護照、當天確認船班；租車留本島。14:30回到本島是後續行程成立的目標，非保證船班。", "nav": "성산포항종합여객터미널 / 064-782-5671"},
-                    {"time": "15:15", "name": "Snoopy Garden 史努比庭園", "category": "景點/打卡", "desc": "從城山港往Snoopy車程抓35–45分鐘，另留停車與入場時間；15:15–16:00快閃45分鐘，只挑喜歡的展區拍照，16:00離場往東福里。", "tip": "10–3月09:00–18:00、17:00最後入場；若渡輪延誤，先按備選方案處理，勿壓縮駕駛安全。", "nav": "스누피가든 / 064-790-2000 / 제주 제주시 구좌읍 금백조로 930"},
-                    {"time": "16:45", "name": "London Bagel Museum Jeju 外帶貝果", "category": "購物/美食", "desc": "Snoopy後往東福里，車程估計35–45分鐘；約16:45到店外帶，預留30分鐘，不安排內用。地址동복로85。", "tip": "Visit Jeju列08:00–18:00；下午可能售罄或提早停止排隊，不能保證買到指定口味。", "nav": "런던베이글뮤지엄 제주 / 제주 제주시 구좌읍 동복로 85"},
-                    {"time": "17:25", "name": "BLUE ELEPHANT SPACE JEJU 購物", "category": "購物", "desc": "買好貝果後在東福里步行前往SPACE JEJU，預留約40分鐘看眼鏡；18:05後在附近坐坐、休息或海邊短散步，18:30再吃晚餐。與夢炭同為동복로83，可在此區集中停車。", "tip": "官方列08:00–19:00；這是舊左SPACE JEJU，不是涯月分店。停車收費及優惠向店家確認。", "nav": "블루엘리펀트 스페이스 제주 / 제주 제주시 구좌읍 동복로 83"},
+                    {"time": "14:50", "name": "城山日出峰 Seongsan Ilchulbong（山腳看景）", "category": "景點/散步", "desc": "牛島回到城山港後，取車往城山日出峰約10–15分鐘，另留停車時間；14:50–15:20約30分鐘在山腳與免費觀景區看景拍照，不安排登頂。", "tip": "只作輕鬆短停；免費與收費步道依現場指示，不走登頂階梯，15:20左右出發往東福里。", "nav": "성산일출봉 / 064-783-0959 / 제주 서귀포시 성산읍 일출로284-12"},
+                    {"time": "16:30", "name": "London Bagel Museum Jeju 外帶貝果", "category": "購物/美食", "desc": "城山日出峰後往東福里，車程估計50–65分鐘；約16:30到店外帶，預留30分鐘，不安排內用。地址동복로85。", "tip": "Visit Jeju列08:00–18:00；下午可能售罄或提早停止排隊，不能保證買到指定口味。", "nav": "런던베이글뮤지엄 제주 / 제주 제주시 구좌읍 동복로 85"},
+                    {"time": "17:10", "name": "BLUE ELEPHANT SPACE JEJU 購物", "category": "購物", "desc": "買好貝果後在東福里步行前往SPACE JEJU，預留約40分鐘看眼鏡；17:50後在附近坐坐、休息或海邊短散步，18:30再吃晚餐。與夢炭同為동복로83，可在此區集中停車。", "tip": "官方列08:00–19:00；這是舊左SPACE JEJU，不是涯月分店。停車收費及優惠向店家確認。", "nav": "블루엘리펀트 스페이스 제주 / 제주 제주시 구좌읍 동복로 83"},
                     {"time": "18:30", "name": "夢炭 濟州（舊左店／몽탄 제주점）晚餐", "category": "美食", "desc": "購物後步行到夢炭，享用招牌牛肋骨；晚餐預留約1.5小時。地址：구좌읍 동복로83，1樓。", "tip": "建議先在Catchtable查18:30可訂時段；本行程沒有代訂，實際晚餐以訂位確認為準，勿選錯涯月店。", "nav": "몽탄 제주점 / 0507-1371-5592 / 제주 제주시 구좌읍 동복로 83"},
                     {"time": "20:30", "name": "返回 MUIZE 民宿休息", "category": "住宿", "desc": "晚餐後往咸德車程抓15–25分鐘，約20:30回民宿，整理隔天退房行李。", "tip": "Day 3仍維持09:30退房出發。", "nav": "뮤이즈 / 0507-1335-3202"}
                 ],
                 options: [
-                    {"name": "渡輪延誤：先保留貝果、購物與已確認的晚餐", "desc": "Snoopy只停45分鐘，渡輪若稍有延誤可使用晚餐前約25分鐘空檔稍作調整；延誤較大時需刪減站點。若預計17:00後才到貝果店且買貝果是優先，略過Snoopy直接往東福里；仍不能保證下午存貨。夢炭訂位如需改時，先聯絡餐廳。", "nav": "런던베이글뮤지엄 제주；스누피가든；몽탄 제주점"},
-                    {"name": "牛島停航：保留陸上路線", "desc": "Fritz早餐後提早往Snoopy，快閃45分鐘及午餐，再到London Bagel Museum外帶、BLUE ELEPHANT購物與夢炭晚餐；不必等到16:45才買貝果。", "nav": "스누피가든 → 런던베이글뮤지엄 제주 → 블루엘리펀트 스페이스 제주 → 몽탄 제주점"}
+                    {"name": "渡輪延誤：縮短山腳短停，保留貝果與晚餐", "desc": "若牛島回程較晚，可縮短城山日出峰山腳停留。若預計17:00後才到貝果店且買貝果是優先，可直接往東福里；下午存貨仍不保證。夢炭如需改訂位時間，先聯絡餐廳。", "nav": "성산일출봉；런던베이글뮤지엄 제주；몽탄 제주점"},
+                    {"name": "牛島停航：保留陸上路線", "desc": "Fritz早餐後改到城山日出峰山腳看景，附近午餐，再往London Bagel Museum外帶、BLUE ELEPHANT購物與夢炭晚餐；可提早買貝果，毋須等到16:30。", "nav": "성산일출봉 → 런던베이글뮤지엄 제주 → 블루엘리펀트 스페이스 제주 → 몽탄 제주점"}
                 ]
             },
             3: {
@@ -337,9 +337,9 @@
                 {"id": 2, "name": "2. Fritz城山早餐", "x": 710, "y": 230, "drive": "約60–75分", "type": "cafe", "desc": "09:45早餐；프릳츠 제주성산점 / 일출로222"},
                 {"id": 3, "name": "3. 城山港", "x": 715, "y": 215, "drive": "約10–15分＋停車", "type": "transport", "desc": "11:00辦理乘船，出航以當天船班為準"},
                 {"id": 4, "name": "4. 牛島精選短遊", "x": 760, "y": 210, "drive": "船程約15分＋候船", "type": "spot", "desc": "目標14:00回程、14:30返本島；含簡單午餐"},
-                {"id": 5, "name": "5. Snoopy Garden", "x": 620, "y": 250, "drive": "約35–45分＋入場", "type": "spot", "desc": "15:15–16:00快閃45分鐘；渡輪延誤時參考備選"},
-                {"id": 6, "name": "6. London Bagel Museum", "x": 560, "y": 185, "drive": "約35–45分", "type": "food", "desc": "16:45外帶；동복로85；18:00關門，可能售罄"},
-                {"id": 7, "name": "7. BLUE ELEPHANT SPACE JEJU", "x": 550, "y": 195, "drive": "步行短程", "type": "shop", "desc": "17:25購物；동복로83；官方19:00關門"},
+                {"id": 5, "name": "5. 城山日出峰（山腳看景）", "x": 710, "y": 230, "drive": "約10–15分＋停車", "type": "spot", "desc": "14:50–15:20短停30分鐘，不登頂；성산일출봉 / 일출로284-12"},
+                {"id": 6, "name": "6. London Bagel Museum", "x": 560, "y": 185, "drive": "約50–65分", "type": "food", "desc": "16:30外帶；동복로85；18:00關門，可能售罄"},
+                {"id": 7, "name": "7. BLUE ELEPHANT SPACE JEJU", "x": 550, "y": 195, "drive": "步行短程", "type": "shop", "desc": "17:10購物；동복로83；官方19:00關門"},
                 {"id": 8, "name": "8. 夢炭 濟州舊左店", "x": 555, "y": 205, "drive": "步行短程", "type": "food", "desc": "18:30晚餐，須自行確認訂位；동복로83"},
                 {"id": 9, "name": "9. 返回MUIZE", "x": 580, "y": 195, "drive": "約15–25分", "type": "hotel", "desc": "20:30回民宿；Day 3維持09:30出發"}
             ],
@@ -385,7 +385,7 @@
             { cat: "Cafe", name: "Fritz Coffee Company Seongsan (프릳츠 제주성산점)", loc: "城山", time: "08:00–19:00（出發前確認）", off: "出發前確認", tip: "Day 2 08:45早餐；GPS：프릳츠 제주성산점 / 제주 서귀포시 성산읍 일출로 222。已更正舊版分店地址。" },
             { cat: "景點", name: "城山港 ➔ 牛島 (Udo)", loc: "東部離島", time: "末班船約 17:00", off: "視天氣風浪而定", tip: "【GPS導航】064-782-5671 / 성산포항종합여객터미널" },
             { cat: "Cafe", name: "Udo Sand", loc: "牛島上", time: "09:30 - 17:00", off: "無", tip: "【GPS導航】우도샌드 / 제주 제주시 우도면 우도해안길 1132" },
-            { cat: "景點", name: "史努比庭園 (Snoopy Garden)", loc: "東部舊左邑", time: "09:00 - 18:00", off: "全年無休", tip: "【GPS導航】064-790-2000 / 제주 제주시 구좌읍 금백조로 930" },
+            { cat: "景點/散步", name: "城山日出峰 Seongsan Ilchulbong（山腳看景）", loc: "東部城山／城山港附近", time: "Day 2 14:50–15:20建議短停；10月園區05:00–19:00（Visit Jeju）", off: "每月第一個星期一；臨時調整以公告為準", tip: "성산일출봉 / 064-783-0959 / 성산읍 일출로284-12。只在山腳及免費觀景區看景，不登頂；步道開放以現場指示為準。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CONT_000000000500349' target='_blank' rel='noopener'>Visit Jeju</a>" },
             { cat: "花卉/景點", name: "山君不離 (산굼부리)", loc: "東部/朝天", time: "09:00 - 18:00", off: "無", tip: "【GPS導航】064-783-9900 / 제주 제주시 조천읍 비자림로 768" },
             { cat: "美食", name: "熟成到 咸德店 (숙성도)", loc: "朝天邑咸德", time: "12:00 - 22:00", off: "無", tip: "【GPS導航】064-783-9951 / 제주 제주시 조천읍 함덕로 40" },
             { cat: "花卉/景點", name: "1100道路 & 千王斷崖", loc: "漢拏山縱貫線", time: "24小時開放", off: "無", tip: "【GPS導航】천왕사 / 064-748-2601 / 제주 제주시 1100로 2583-9" },
@@ -405,8 +405,8 @@
             { cat: "美食", name: "Noraba 海鮮拉麵 (노라바)", loc: "涯月海岸／新嚴里", time: "平日10:00–17:00；週末10:00–17:30；午休14:00–15:00", off: "出發前確認臨時公休／售罄", tip: "【GPS導航】0507-1360-1900 / 애월해안로 570-1；勿沿用舊址구엄길100。最後點餐平日16:30／週末17:00。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000022664' target='_blank' rel='noopener'>Visit Jeju</a> · <a class='text-blue-600 underline' href='https://foodieteller.com/noraba/' target='_blank' rel='noopener'>食記</a>" },
             { cat: "購物", name: "Hetras Jeju (헤트라스 제주)", loc: "濟州市蓮洞", time: "10:30–23:00（官方店舖頁）", off: "出發前確認臨時調整", tip: "Day 1 11:45；0507-1379-0101 / 제주 제주시 신광로 22，1樓。<a class='text-blue-600 underline' href='https://m.hetras.co.kr/location?board_no=1002' target='_blank' rel='noopener'>官方門市資訊</a>" },
             { cat: "購物", name: "Olive Young 東門市場店", loc: "七星街／東門市場附近", time: "出發前確認店家最新營業時間", off: "出發前確認", tip: "Day 1 13:45；올리브영 제주동문시장점 / 064-757-7300 / 제주 제주시 관덕로 62-1；與七星街步行串連。" },
-            { cat: "美食/購物", name: "London Bagel Museum Jeju", loc: "舊左東福里", time: "08:00–18:00", off: "出發前確認／售罄可能早收", tip: "Day 2 16:45外帶；런던베이글뮤지엄 제주 / 동복로85。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_300000000015952' target='_blank' rel='noopener'>Visit Jeju</a>；下午存貨不保證。" },
-            { cat: "購物", name: "BLUE ELEPHANT SPACE JEJU", loc: "舊左東福里（非涯月店）", time: "08:00–19:00（官方門市頁）", off: "出發前確認", tip: "Day 2 17:25；블루엘리펀트 스페이스 제주 / 동복로83。<a class='text-blue-600 underline' href='https://us.blueelephant.co/pages/stores' target='_blank' rel='noopener'>官方門市資訊</a>" },
+            { cat: "美食/購物", name: "London Bagel Museum Jeju", loc: "舊左東福里", time: "08:00–18:00", off: "出發前確認／售罄可能早收", tip: "Day 2 16:30外帶；런던베이글뮤지엄 제주 / 동복로85。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_300000000015952' target='_blank' rel='noopener'>Visit Jeju</a>；下午存貨不保證。" },
+            { cat: "購物", name: "BLUE ELEPHANT SPACE JEJU", loc: "舊左東福里（非涯月店）", time: "08:00–19:00（官方門市頁）", off: "出發前確認", tip: "Day 2 17:10；블루엘리펀트 스페이스 제주 / 동복로83。<a class='text-blue-600 underline' href='https://us.blueelephant.co/pages/stores' target='_blank' rel='noopener'>官方門市資訊</a>" },
             { cat: "美食", name: "夢炭 濟州（舊左店／몽탄 제주점）", loc: "舊左東福里（非涯月店）", time: "18:30為建議晚餐時間；營業及入場以店家確認為準", off: "訂位時確認", tip: "0507-1371-5592 / 구좌읍 동복로83，1樓。Catchtable查訂位；未代訂，不保證18:30有位。" },
             { cat: "景點/散步", name: "梨湖木筏海灘 Iho Tewoo Beach", loc: "機場西側北岸", time: "Day 1 09:30–10:00建議短停", off: "戶外散步視天氣", tip: "이호테우해수욕장 / 제주 제주시 도리로20；白馬燈塔海景；風浪大時不走防波堤，天氣不佳則省略。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_200000000007344' target='_blank' rel='noopener'>Visit Jeju</a>" },
             { cat: "Cafe", name: "Antoinette Yongdam (앙뚜아네트 용담점)", loc: "龍潭海岸／機場附近", time: "08:00–19:30；最後點餐19:20（Visit Jeju）", off: "出發前確認", tip: "Day 5 15:15–16:15咖啡放空；0507-1359-2243 / 제주 제주시 서해안로671。<a class='text-blue-600 underline' href='https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_200000000008092' target='_blank' rel='noopener'>Visit Jeju</a>" },
